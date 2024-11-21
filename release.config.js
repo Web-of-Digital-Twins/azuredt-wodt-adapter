@@ -22,13 +22,8 @@ config.plugins.push(
         "publishCmd": publishCommands,
     }],
     // Release also in GitHub
-    ["@semantic-release/github", {
-        "assets": []
-    }],
-    ["@semantic-release/git", {
-        "assets": ["CHANGELOG.md", "package.json"],
-        "message": "chore(release)!: [skip ci] ${nextRelease.version} released"
-    }]
+    "@semantic-release/github",
+    "@semantic-release/git",
 )
 
 // JS Semantic Release configuration must export the JS configuration object
