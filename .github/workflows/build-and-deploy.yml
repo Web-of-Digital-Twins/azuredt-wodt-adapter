@@ -26,7 +26,7 @@ jobs:
     strategy:
         matrix:
           os: [ubuntu, macos, windows]
-          java-version: [11, 17]
+          java-version: [17, 21]
     runs-on: ${{ matrix.os }}-latest
     steps:
       - name: Checkout the repository
@@ -108,12 +108,15 @@ jobs:
           submodules: recursive
           fetch-depth: 0
       - name: Generate and deploy documentation
-        uses: SmartOperatingBlock/documentation-ghp-action@1.1.0
+        uses: AndreaGiulianelli/documentation-ghp-action@1.1.1
         with:
           should-generate-code-documentation: true
           code-documentation-generation-command: ./gradlew dokkaHtml
           code-documentation-dst-folder: './build/dokka/html'
           code-documentation-site-folder: 'documentation/code-doc'
+          should-generate-openapi-documentation: true
+          openapi-documentation-input-file: 'docs/rest-api/rest-api-docs.yml'
+          openapi-documentation-dst-folder: 'documentation/openapi-doc'
           github-token: ${{ secrets.GITHUB_TOKEN }}
           
   success:
