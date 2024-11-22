@@ -34,32 +34,33 @@ sealed interface RdfResource : RdfNode {
 }
 
 /** It represents an RDF Resource that has a [uri], e.g., class, property, individual, and so on. */
-sealed interface RdfUriResource : RdfResource {
-    override val uri: URI
-}
+open class RdfUriResource(override val uri: URI) : RdfResource
 
 /** It represents an RdfClass, identified by its [uri]. */
-data class RdfClass(override val uri: URI) : RdfUriResource
+data class RdfClass(override val uri: URI) : RdfUriResource(uri)
 
 /** It represents an RdfProperty, identified by its [uri]. */
-data class RdfProperty(override val uri: URI) : RdfUriResource
+data class RdfProperty(override val uri: URI) : RdfUriResource(uri)
 
 /** It represents an RdfIndividual, identified by its [uri]. */
-data class RdfIndividual(override val uri: URI) : RdfUriResource
+data class RdfIndividual(override val uri: URI) : RdfUriResource(uri)
 
 /**
  * This class represents a triple without a subject.
  * It is useful when we want to define the [triplePredicate] and the [tripleObject] for an external defined subject.
  */
-data class RdfUnSubjectedTriple(val triplePredicate: RdfProperty, val tripleObject: RdfNode)
+data class RdfPredicateObjectPair(val triplePredicate: RdfProperty, val tripleObject: RdfNode)
 
 /**
  * It models the concept of RDF Blank Node in the context of Digital Twin Knowledge Graph.
  * A Blank Node has a [blankNodeId] and it has an associated [tripleList].
  */
-data class RdfBlankNode(val blankNodeId: String, val tripleList: List<RdfUnSubjectedTriple> = listOf()) : RdfResource {
+data class RdfBlankNode(
+    val blankNodeId: String,
+    val tripleList: List<RdfPredicateObjectPair> = listOf(),
+) : RdfResource {
     override val uri = null
 
     /** Add a [triple] to the blank node. It will return a new blank node with the triple added. */
-    fun addTriple(triple: RdfUnSubjectedTriple): RdfBlankNode = RdfBlankNode(blankNodeId, tripleList + triple)
+    fun addTriple(triple: RdfPredicateObjectPair): RdfBlankNode = RdfBlankNode(blankNodeId, tripleList + triple)
 }
