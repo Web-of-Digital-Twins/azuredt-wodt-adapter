@@ -17,10 +17,9 @@
 package model.semantics
 
 import model.semantics.rdf.RdfClass
-import model.semantics.rdf.RdfIndividual
-import model.semantics.rdf.RdfLiteral
-import model.semantics.rdf.RdfUnSubjectedTriple
+import model.semantics.rdf.RdfPredicateObjectPair
 import model.semantics.rdf.RdfUriResource
+import java.net.URI
 
 /**
  * This interface models the entire semantics of the Digital Twin useful to create the HWoDT Uniform Interface.
@@ -40,14 +39,14 @@ interface DigitalTwinSemantics {
     fun getDomainTag(elementName: String): RdfUriResource?
 
     /**
-     * Map the [value] of a Digital Twin property with [propertyName] in a list of [RdfUnSubjectedTriple].
-     * If the [propertyName] is not mapped then null is returned.
+     * Map the [value] of a Digital Twin property with [propertyName] and a type [T] in
+     * a list of [RdfPredicateObjectPair]. If the [propertyName] is not mapped then null is returned.
      */
-    fun mapData(propertyName: String, value: RdfLiteral<*>): List<RdfUnSubjectedTriple>?
+    fun <T : Any> mapData(propertyName: String, value: T): List<RdfPredicateObjectPair>?
 
     /**
      * Map the [targetDT] instance of a Digital Twin relationship with [relationshipName] in a list
-     * of [RdfUnSubjectedTriple]. If the [relationshipName] is not mapped then null is returned.
+     * of [RdfPredicateObjectPair]. If the [relationshipName] is not mapped then null is returned.
      */
-    fun mapData(relationshipName: String, targetDT: RdfIndividual): List<RdfUnSubjectedTriple>?
+    fun mapData(relationshipName: String, targetDT: URI): List<RdfPredicateObjectPair>?
 }
