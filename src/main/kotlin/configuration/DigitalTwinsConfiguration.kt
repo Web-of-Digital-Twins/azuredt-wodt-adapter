@@ -20,7 +20,7 @@ import model.dtd.DTVersion
 import model.semantics.DigitalTwinSemantics
 import java.net.URI
 
-/** It models the Configuration of the adapter in terms of the Digital Twins to expose. */
+/** It models the Configuration of the adapter in terms of the Digital Twins to expose. It has a more dynamic nature. */
 interface AdapterDTsConfiguration {
     /**
      * The configurations of the Digital Twins to expose.
