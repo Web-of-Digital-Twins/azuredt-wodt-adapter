@@ -21,9 +21,12 @@ import model.semantics.DigitalTwinSemantics
 import java.net.URI
 
 /** It models the Configuration of the adapter in terms of the Digital Twins to expose. */
-interface Configuration {
-    /** The configurations of the Digital Twins to expose.  */
-    val digitalTwinConfigurations: Set<DigitalTwinConfiguration>
+interface AdapterDTsConfiguration {
+    /**
+     * The configurations of the Digital Twins to expose.
+     * A map from the Azure DT ID to the associated configuration.
+     */
+    val digitalTwinConfigurations: Map<String, DigitalTwinConfiguration>
 }
 
 /**
