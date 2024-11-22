@@ -16,7 +16,7 @@
 
 package configuration.dsl
 
-import configuration.Configuration
+import configuration.AdapterDTsConfiguration
 import configuration.DigitalTwinConfiguration
 import model.dtd.DTVersion
 import model.semantics.DigitalTwinSemantics
@@ -29,24 +29,25 @@ import java.net.URI
 @DslMarker
 annotation class ConfigurationDSL
 
-/** Extension of the [Configuration] class to create DSL facilities. */
+/** Extension of the [AdapterDTsConfiguration] class to create DSL facilities. */
 @ConfigurationDSL
-class ConfigurationScope : Configuration {
-    private var dtConfigurations: Set<DigitalTwinConfiguration> = setOf()
+class AdapterDTsConfigurationScope : AdapterDTsConfiguration {
+    private var dtConfigurations: Map<String, DigitalTwinConfiguration> = mapOf()
 
     override val digitalTwinConfigurations
         get() = dtConfigurations
 
     /** Dsl function to create a Digital Twin Configuration. */
     fun dt(azureID: String, input: DigitalTwinConfigurationScope.() -> Unit) {
-        dtConfigurations = dtConfigurations + DigitalTwinConfigurationScope(azureID)
-            .apply { input() }.toDigitalTwinConfiguration()
+        dtConfigurations = dtConfigurations +
+            (azureID to DigitalTwinConfigurationScope(azureID).apply { input() }.toDigitalTwinConfiguration())
     }
 }
 
-/** DSL function to easily create a [Configuration] and configure it via the provided [input]. */
+/** DSL function to easily create a [AdapterDTsConfiguration] and configure it via the provided [input]. */
 @ConfigurationDSL
-fun configuration(input: ConfigurationScope.() -> Unit): Configuration = ConfigurationScope().apply { input() }
+fun configuration(input: AdapterDTsConfigurationScope.() -> Unit): AdapterDTsConfiguration =
+    AdapterDTsConfigurationScope().apply { input() }
 
 /** DSL Scope to define the Digital Twin classes.  */
 @ConfigurationDSL
