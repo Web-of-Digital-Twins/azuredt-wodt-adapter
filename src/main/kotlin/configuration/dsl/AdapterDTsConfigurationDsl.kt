@@ -149,3 +149,14 @@ class DigitalTwinConfigurationScope(var azureID: String) {
         _semantics,
     )
 }
+
+/** Object that contains static data about the dsl. */
+object AdapterDTsConfigurationDsl {
+    /** Kotlin imports for any file that uses the DSL. */
+    val DSL_IMPORTS = """
+        import model.dtd.DTVersion
+        import model.semantics.rdf.*
+        import java.net.URI
+        import configuration.dsl.*
+    """.trimIndent()
+}
