@@ -1,20 +1,22 @@
-# Template for Kotlin projects
+# Azure Digital Twins Web of Digital Twins adapter
 
-![Release](https://github.com/AndreaGiulianelli/kotlin-template-project/actions/workflows/build-and-deploy.yml/badge.svg?style=plastic)
+![Release](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/actions/workflows/build-and-deploy.yml/badge.svg?style=plastic)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=plastic)](https://opensource.org/licenses/MIT)
-![Version](https://img.shields.io/github/v/release/AndreaGiulianelli/kotlin-template-project?style=plastic)
+![Version](https://img.shields.io/github/v/release/Web-of-Digital-Twins/azuredt-wodt-adapter?style=plastic)
 
+A simple middleware for [Azure Digital Twins](https://learn.microsoft.com/en-us/azure/digital-twins/overview) (ADT) to be able to expose ADT DTs as WoDT Digital Twins.
 
-## Setup
-In order to use this template you need to do the following steps:
-1. modify project name in `settings.gradle.kts`
-<!--
-2. [Optional] set up branch protection and a Personal Access Token and modify it in the `release` job for `semantic release`([more here](https://semantic-release.gitbook.io/semantic-release/recipes/ci-configurations/github-actions#pushing-package.json-changes-to-a-master-branch))
--->
+## Architecture
+**TODO: write**
 
-## Useful apps to install when used
-- CodeCov
-- Renovate Bot
-- GitGuardian
-- Mergify
-- SonarCloud
+## Usage
+**TODO: write**
+- configuration file (with dsl) for dt configuration
+- environmental variables
+- docker instructions
+
+## Documentation
+**TODO: write**
+
+## Useful resources
+- [`azuredt-wodt-adapter-azurefunction`](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter-azurefunction): the Azure Function to deploy in the Azure pipeline to work with this adapter.
