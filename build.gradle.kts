@@ -31,6 +31,7 @@ repositories {
 
 dependencies {
     implementation(libs.kotlin.stdlib)
+    implementation(libs.kotlin.scripting)
     testImplementation(libs.bundles.kotlin.testing)
 }
 
