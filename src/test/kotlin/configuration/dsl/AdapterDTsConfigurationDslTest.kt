@@ -26,7 +26,7 @@ import model.semantics.rdf.RdfPredicateObjectPair
 import model.semantics.rdf.RdfProperty
 import java.net.URI
 
-class ConfigurationDslTest : StringSpec({
+class AdapterDTsConfigurationDslTest : StringSpec({
     "a simple complete configuration must be compiled" {
         configuration {
             dt("lampDT") {
