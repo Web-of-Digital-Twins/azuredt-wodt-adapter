@@ -23,7 +23,7 @@ import io.kotest.matchers.shouldNotBe
 
 class DslLoaderTest : StringSpec({
     fun loadDsl(fileName: String, imports: String) = DslLoaderImpl().load(
-        this::class.java.classLoader.getResource(fileName)?.path ?: "",
+        this::class.java.classLoader.getResource(fileName)?.path.orEmpty(),
         imports,
     )
 
