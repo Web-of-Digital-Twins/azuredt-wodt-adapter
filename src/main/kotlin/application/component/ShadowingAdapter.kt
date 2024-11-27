@@ -18,7 +18,6 @@ package application.component
 
 import kotlinx.coroutines.flow.Flow
 import model.event.ShadowingEvent
-import kotlin.coroutines.CoroutineContext
 
 /** This interface models a simple shadowing adapter for Azure Digital Twins. */
 interface ShadowingAdapter {
@@ -26,5 +25,5 @@ interface ShadowingAdapter {
     val events: Flow<ShadowingEvent>
 
     /** Start the adaptation and extension of the shadowing function of the twin builder used under the hood. */
-    suspend fun start(context: CoroutineContext)
+    suspend fun start()
 }

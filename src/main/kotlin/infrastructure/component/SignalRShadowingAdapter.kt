@@ -25,6 +25,7 @@ import com.microsoft.signalr.HubConnectionState
 import configuration.Configuration
 import io.github.oshai.kotlinlogging.KotlinLogging
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
@@ -37,13 +38,16 @@ import kotlin.coroutines.CoroutineContext
  * This class implements a SignalR-based [ShadowingAdapter]. It is configured via its [configuration]
  * DT updates are mapped in DT snapshots by an Azure Function that are sent via SignalR to consumers.
  */
-class SignalRShadowingAdapter(private val configuration: Configuration) : ShadowingAdapter {
+class SignalRShadowingAdapter(
+    private val configuration: Configuration,
+    private val context: CoroutineContext = Dispatchers.Default,
+) : ShadowingAdapter {
     private val _events = MutableSharedFlow<ShadowingEvent>()
     private val signalRClient = HubConnectionBuilder.create(configuration.signalrNegotiationUrl.toString()).build()
 
     override val events = _events.asSharedFlow()
 
-    override suspend fun start(context: CoroutineContext) {
+    override suspend fun start() {
         signalRClient.on(configuration.signalrTopicName, {
             Json.decodeFromString<SignalRDigitalTwinUpdate>(it)
                 .filterEvent()
