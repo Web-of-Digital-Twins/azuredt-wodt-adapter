@@ -16,7 +16,7 @@
 
 package configuration
 
-import model.dtd.DTVersion
+import model.dt.DTVersion
 import model.semantics.DigitalTwinSemantics
 import java.net.URI
 
