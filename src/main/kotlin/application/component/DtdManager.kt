@@ -16,8 +16,8 @@
 
 package application.component
 
+import model.dt.DTUri
 import org.eclipse.ditto.wot.model.ThingDescription
-import java.net.URI
 
 /** This interface models the DTD Manager component. */
 interface DtdManager {
@@ -25,5 +25,5 @@ interface DtdManager {
      * Obtain the Digital Twin Description of the DT with the provided [dtUri].
      * The adapter implements the DTD with the Thing Description.
      */
-    operator fun get(dtUri: URI): ThingDescription?
+    operator fun get(dtUri: DTUri): ThingDescription?
 }

@@ -16,6 +16,7 @@
 
 package model.semantics.rdf
 
+import model.dt.DTUri
 import java.net.URI
 
 /**
@@ -71,4 +72,4 @@ data class RdfBlankNode(
  * about a Digital Twin and not to be a generic implementation of a Knowledge Graph.
  * Its main usage will be as a DTO to be converted in different KG models of different libraries.
  */
-data class DTKnowledgeGraph(val dtUri: URI, val tripleList: List<RdfPredicateObjectPair>)
+data class DTKnowledgeGraph(val dtUri: DTUri, val tripleList: List<RdfPredicateObjectPair>)

@@ -16,6 +16,7 @@
 
 package application.component
 
+import model.dt.DTUri
 import java.net.URI
 
 /** This interface models the Platform Management Interface component. */
@@ -24,7 +25,7 @@ interface PlatformManagementInterface : PlatformManagementInterfaceReader, Platf
      * Request the registration of the DT, identified by its [dtUri], to the WoDT Platform at [platformUrl].
      * Returns true if successful and not already registered, false instead.
      */
-    fun requestPlatformRegistration(dtUri: URI, platformUrl: URI): Boolean
+    fun requestPlatformRegistration(dtUri: DTUri, platformUrl: URI): Boolean
 
     /**
      * Signal to the Platform Management Interface the deletion of the managed Digital Twin with [dtUri].
@@ -32,7 +33,7 @@ interface PlatformManagementInterface : PlatformManagementInterfaceReader, Platf
      * which it is registered.
      * Returns true if successful, false instead.
      */
-    fun signalDTDeletion(dtUri: URI): Boolean
+    fun signalDTDeletion(dtUri: DTUri): Boolean
 }
 
 /** This interface models the external notifier part of the [PlatformManagementInterface] component. */
@@ -41,11 +42,11 @@ interface PlatformManagementInterfaceNotifier {
      * Notify the registration of a DT with [dtUri] to a WoDT Platform with [platformUrl].
      * Returns true if the DT was not already registered to the WoDT Platform, false instead.
      */
-    fun notifyNewRegistration(dtUri: URI, platformUrl: URI): Boolean
+    fun notifyNewRegistration(dtUri: DTUri, platformUrl: URI): Boolean
 }
 
 /** This interface models the reader part of the [PlatformManagementInterface] component. */
 interface PlatformManagementInterfaceReader {
     /** Obtain all the Platform URLs to which the DT, identified by its [dtUri], is registered to. */
-    operator fun get(dtUri: URI): Set<URI>
+    operator fun get(dtUri: DTUri): Set<URI>
 }

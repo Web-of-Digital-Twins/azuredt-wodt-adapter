@@ -16,10 +16,10 @@
 
 package model.semantics
 
+import model.dt.DTUri
 import model.semantics.rdf.RdfClass
 import model.semantics.rdf.RdfPredicateObjectPair
 import model.semantics.rdf.RdfUriResource
-import java.net.URI
 
 /**
  * This interface models the entire semantics of the Digital Twin useful to create the HWoDT Uniform Interface.
@@ -48,5 +48,5 @@ interface DigitalTwinSemantics {
      * Map the [targetDT] instance of a Digital Twin relationship with [relationshipName] in a list
      * of [RdfPredicateObjectPair]. If the [relationshipName] is not mapped then null is returned.
      */
-    fun mapData(relationshipName: String, targetDT: URI): List<RdfPredicateObjectPair>?
+    fun mapData(relationshipName: String, targetDT: DTUri): List<RdfPredicateObjectPair>?
 }
