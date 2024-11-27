@@ -18,6 +18,7 @@ package configuration.dsl
 
 import configuration.AdapterDTsConfiguration
 import configuration.DigitalTwinConfiguration
+import model.dt.DTUri
 import model.dt.DTVersion
 import model.semantics.DigitalTwinSemantics
 import model.semantics.rdf.RdfClass
@@ -110,8 +111,8 @@ class DigitalTwinSemanticsScope : DigitalTwinSemantics {
 
     override fun mapData(
         relationshipName: String,
-        targetDT: URI,
-    ): List<RdfPredicateObjectPair>? = _relationshipMapping[relationshipName]?.invoke(targetDT)
+        targetDT: DTUri,
+    ): List<RdfPredicateObjectPair>? = _relationshipMapping[relationshipName]?.invoke(targetDT.uri)
 }
 
 /** DSL function to easily create an [URI] from a [stringRepresentation]. */
