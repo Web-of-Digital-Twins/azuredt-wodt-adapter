@@ -18,7 +18,7 @@ package configuration.dsl
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
-import model.dtd.DTVersion
+import model.dt.DTVersion
 import model.semantics.rdf.RdfBlankNode
 import model.semantics.rdf.RdfIndividual
 import model.semantics.rdf.RdfLiteral

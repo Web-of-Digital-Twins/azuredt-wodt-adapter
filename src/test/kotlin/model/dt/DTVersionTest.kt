@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package model.dtd
+package model.dt
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
