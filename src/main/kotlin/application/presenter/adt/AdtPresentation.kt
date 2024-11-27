@@ -99,9 +99,9 @@ fun SignalRDigitalTwinUpdate.toDTKnowledgeGraph(dtUri: DTUri, dtSemantics: Digit
     DTKnowledgeGraph(
         dtUri,
         this.properties.flatMap { (propertyName, jsonValue) ->
-            dtSemantics.mapData(propertyName, jsonValue.toPrimitive()) ?: listOf()
+            dtSemantics.mapData(propertyName, jsonValue.toPrimitive()).orEmpty()
         } + this.relationships.flatMap { (_, relationshipName, targetID, _) ->
-            dtSemantics.mapData(relationshipName, DTUri(URI.create(targetID))) ?: listOf()
+            dtSemantics.mapData(relationshipName, DTUri(URI.create(targetID))).orEmpty()
         },
     )
 
