@@ -81,3 +81,5 @@ outTmp/
 /kotlin-native/dist
 kotlin-ide/
 .vscode/*
+.env
+.env.sh
