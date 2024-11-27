@@ -18,7 +18,6 @@ package application.service
 
 import application.component.ShadowingAdapter
 import io.github.oshai.kotlinlogging.KotlinLogging
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
@@ -34,7 +33,7 @@ class Engine(
      * Start the engine.
      */
     suspend fun start() = coroutineScope {
-        shadowingAdapter.start(Dispatchers.Default)
+        shadowingAdapter.start()
         launch {
             shadowingAdapter.events.collect {
                 logger.info { it }
