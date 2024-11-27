@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package model.dtd
+package model.dt
 
 /**
  * Value object that implement the version of the DT, following the semantic versioning rationale.
