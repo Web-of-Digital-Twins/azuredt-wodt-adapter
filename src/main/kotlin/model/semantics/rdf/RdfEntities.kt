@@ -64,3 +64,11 @@ data class RdfBlankNode(
     /** Add a [triple] to the blank node. It will return a new blank node with the triple added. */
     fun addTriple(triple: RdfPredicateObjectPair): RdfBlankNode = this.copy(tripleList = tripleList + triple)
 }
+
+/**
+ * It models the Digital Twin Knowledge graph of a Digital Twin, identified by its [dtUri], in an abstract way.
+ * Its objective is to serve as the base to represent semantic data, in particular its [tripleList],
+ * about a Digital Twin and not to be a generic implementation of a Knowledge Graph.
+ * Its main usage will be as a DTO to be converted in different KG models of different libraries.
+ */
+data class DTKnowledgeGraph(val dtUri: URI, val tripleList: List<RdfPredicateObjectPair>)
