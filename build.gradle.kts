@@ -21,6 +21,7 @@ plugins {
     alias(libs.plugins.dokka)
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kotlin.qa)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 group = "io.github.andreagiulianelli"
@@ -35,6 +36,7 @@ dependencies {
     implementation(libs.azure.signalr)
     implementation(libs.ditto.wot.model)
     implementation(libs.kotlin.coroutines)
+    implementation(libs.kotlin.serialization.json)
     implementation(libs.kotlin.stdlib)
     implementation(libs.kotlin.scripting)
     implementation(libs.logging)
