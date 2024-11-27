@@ -21,7 +21,7 @@ import configuration.dsl.DslLoader
 import java.net.URI
 
 /** [AdapterConfiguration] implementation with Environmental Variables and DSL file loader. */
-class ConfigurationLoader(dslLoader: DslLoader) : AdapterConfiguration, AdapterDTsConfiguration {
+class ConfigurationLoader(dslLoader: DslLoader) : Configuration {
     private val dtsConfiguration: AdapterDTsConfiguration
 
     init {

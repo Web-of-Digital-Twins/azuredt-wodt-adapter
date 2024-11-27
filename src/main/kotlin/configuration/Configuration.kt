@@ -20,6 +20,39 @@ import model.dt.DTVersion
 import model.semantics.DigitalTwinSemantics
 import java.net.URI
 
+/** It models the entire configuration of the Adapter. */
+interface Configuration : AdapterConfiguration, AdapterDTsConfiguration
+
+/**
+ * It models the configuration of the Adapter.
+ * It has a more static nature.
+ */
+interface AdapterConfiguration {
+    /** Represents the port exposed by the Azure ADT WoDT adapter for its services. */
+    val exposedPort: Int
+
+    /** Represents the actual URL exposed publicly by the Azure ADT WoDT Adapter once deployed. */
+    val exposedUrl: URI
+
+    /** Represent the ID of an Azure AD application. */
+    val azureClientID: String
+
+    /** Represent the ID of the application's Azure AD tenant. */
+    val azureTenantID: String
+
+    /** Represent the Azure AD application's client secrets. */
+    val azureClientSecret: String
+
+    /** Represent the Azure Digital Twins instance endpoint. */
+    val azureDTEndpoint: URI
+
+    /** Represents the Azure SignalR Negotiation url. */
+    val signalrNegotiationUrl: URI
+
+    /** Represents the topic name used to publish events on SignalR. */
+    val signalrTopicName: String
+}
+
 /** It models the Configuration of the adapter in terms of the Digital Twins to expose. It has a more dynamic nature. */
 interface AdapterDTsConfiguration {
     /**
