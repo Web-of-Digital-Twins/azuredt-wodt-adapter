@@ -1,3 +1,9 @@
+import application.service.Engine
+import configuration.ConfigurationLoader
+import configuration.dsl.DslLoaderImpl
+import infrastructure.component.SignalRShadowingAdapter
+import kotlinx.coroutines.runBlocking
+
 /*
  * Copyright (c) 2024. Andrea Giulianelli
  *
@@ -15,8 +21,12 @@
  */
 
 /**
- * Template for kotlin projects.
+ * Entry point of the Azure Digital Twins WoDT Adapter.
  */
-fun main() {
-    println("Hello World from Kotlin Template")
+fun main(): Unit = runBlocking {
+    val configuration = ConfigurationLoader(DslLoaderImpl())
+    val shadowingAdapter = SignalRShadowingAdapter(configuration)
+
+    val engine = Engine(shadowingAdapter)
+    engine.start()
 }
