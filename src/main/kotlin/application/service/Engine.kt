@@ -16,19 +16,34 @@
 
 package application.service
 
+import application.component.ShadowingAdapter
+import io.github.oshai.kotlinlogging.KotlinLogging
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
 /**
  * The Engine that runs the ADT WoDT Adapter.
+ * It takes the:
+ * - [shadowingAdapter]
  */
-class Engine {
+class Engine(
+    private val shadowingAdapter: ShadowingAdapter,
+) {
     /**
      * Start the engine.
      */
     suspend fun start() = coroutineScope {
+        shadowingAdapter.start(Dispatchers.Default)
         launch {
-            println("Hello World")
+            shadowingAdapter.events.collect {
+                logger.info { it }
+            }
         }
+    }
+
+    /** Companion object of the [Engine] class. */
+    companion object {
+        private val logger = KotlinLogging.logger {}
     }
 }
