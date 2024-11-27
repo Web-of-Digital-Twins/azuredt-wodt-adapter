@@ -62,5 +62,5 @@ data class RdfBlankNode(
     override val uri = null
 
     /** Add a [triple] to the blank node. It will return a new blank node with the triple added. */
-    fun addTriple(triple: RdfPredicateObjectPair): RdfBlankNode = RdfBlankNode(blankNodeId, tripleList + triple)
+    fun addTriple(triple: RdfPredicateObjectPair): RdfBlankNode = this.copy(tripleList = tripleList + triple)
 }
