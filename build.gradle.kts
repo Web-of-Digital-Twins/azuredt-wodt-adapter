@@ -30,6 +30,7 @@ repositories {
 }
 
 dependencies {
+    implementation(libs.kotlin.coroutines)
     implementation(libs.kotlin.stdlib)
     implementation(libs.kotlin.scripting)
     implementation(libs.logging)
