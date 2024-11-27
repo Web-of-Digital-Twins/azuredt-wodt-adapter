@@ -24,7 +24,7 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
 }
 
-group = "io.github.andreagiulianelli"
+group = "io.github.wodt"
 
 repositories {
     mavenCentral()
