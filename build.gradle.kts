@@ -30,6 +30,8 @@ repositories {
 }
 
 dependencies {
+    implementation(libs.azure.digital.twins)
+    implementation(libs.azure.identity)
     implementation(libs.ditto.wot.model)
     implementation(libs.kotlin.coroutines)
     implementation(libs.kotlin.stdlib)
