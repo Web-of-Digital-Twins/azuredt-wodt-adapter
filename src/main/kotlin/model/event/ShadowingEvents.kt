@@ -16,8 +16,8 @@
 
 package model.event
 
+import model.dt.DTUri
 import model.semantics.rdf.DTKnowledgeGraph
-import java.net.URI
 
 /** Interface that models the shadowing events to be dispatched through the system. */
 sealed interface ShadowingEvent
@@ -29,4 +29,4 @@ data class CreateEvent(val dtKnowledgeGraph: DTKnowledgeGraph) : ShadowingEvent
 data class UpdateEvent(val dtKnowledgeGraph: DTKnowledgeGraph) : ShadowingEvent
 
 /** This class models the event of the deletion of the digital twin identified by [dtUri]. */
-data class DeleteEvent(val dtUri: URI) : ShadowingEvent
+data class DeleteEvent(val dtUri: DTUri) : ShadowingEvent
