@@ -18,7 +18,7 @@ package configuration.dsl
 
 import configuration.AdapterDTsConfiguration
 import configuration.DigitalTwinConfiguration
-import model.dtd.DTVersion
+import model.dt.DTVersion
 import model.semantics.DigitalTwinSemantics
 import model.semantics.rdf.RdfClass
 import model.semantics.rdf.RdfPredicateObjectPair
@@ -154,7 +154,7 @@ class DigitalTwinConfigurationScope(var azureID: String) {
 object AdapterDTsConfigurationDsl {
     /** Kotlin imports for any file that uses the DSL. */
     val DSL_IMPORTS = """
-        import model.dtd.DTVersion
+        import model.dt.DTVersion
         import model.semantics.rdf.*
         import java.net.URI
         import configuration.dsl.*
