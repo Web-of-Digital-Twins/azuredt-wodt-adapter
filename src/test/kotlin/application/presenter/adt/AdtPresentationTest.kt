@@ -61,6 +61,20 @@ class AdtPresentationTest : StringSpec({
         eventDateTime = "2024-01-01T10:00:00",
     )
 
+    val azureDTState = AzureDigitalTwinState(
+        dtId = "lampDT",
+        mapOf(
+            "luminosity" to JsonPrimitive(100),
+        ),
+        listOf(
+            AzureDigitalTwinRelationship(
+                relationshipName = "isInRoom",
+                targetId = "http://example.com",
+                external = true,
+            ),
+        ),
+    )
+
     val extractedDTKnowledgeGraph = DTKnowledgeGraph(
         dtUri = dtUri,
         listOf(
@@ -154,5 +168,12 @@ class AdtPresentationTest : StringSpec({
         }
 
         signalRDTDelete.toShadowingEvent(dtUri, semantics) shouldBe DeleteEvent(dtUri)
+    }
+
+    "It should be possible to extract the DT Knowledge Graph from a Azure Digital Twin current state" {
+        azureDTState.extractDTKnowledgeGraph(
+            dtUri,
+            checkNotNull(dtsConfiguration.digitalTwinConfigurations["lampDT"]?.semantics) { "check configuration" },
+        ) shouldBe extractedDTKnowledgeGraph
     }
 })
