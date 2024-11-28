@@ -1,0 +1,23 @@
+{
+  "dtId": "ambulance",
+  "eventType": "UPDATE",
+  "eventDateTime": "2024-11-27T08:51:54.984695+00:00",
+  "properties": {
+    "busy": true,
+    "fuelLevel": 4
+  },
+  "relationships": [
+    {
+      "$sourceId": "ambulance",
+      "$relationshipName": "rel_is_approaching",
+      "$targetId": "http://example.com",
+      "external": true
+    },
+    {
+      "$sourceId": "ambulance",
+      "$relationshipName": "rel_is_part_of_mission",
+      "$targetId": "mission2",
+      "external": false
+    }
+  ]
+}
