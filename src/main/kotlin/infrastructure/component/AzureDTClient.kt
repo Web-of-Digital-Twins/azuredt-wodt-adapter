@@ -31,15 +31,23 @@ import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import com.azure.json.models.JsonObject as AzureJsonObject
 
-/** This class wraps the client to perform operations on Azure Digital Twins. It takes the adapter [configuration]. */
-class AzureDTClient(configuration: AdapterConfiguration) {
+/** This interface models the client to perform operations on Azure Digital Twins. */
+interface AzureDTClient {
+    /** Get the current state of the Digital Twin with the provided [azureId]. */
+    fun getDTCurrentState(azureId: String): AzureDigitalTwinState?
+
+    /** Get the DTDL model of the Digital Twin in ADT with the provided [azureId]. */
+    fun getDTModel(azureId: String): JsonObject?
+}
+
+/** Implementation of [AzureDTClient]. It takes the adapter [configuration]. */
+class AzureDTClientImpl(configuration: AdapterConfiguration) : AzureDTClient {
     private val azureClient = DigitalTwinsClientBuilder()
         .credential(DefaultAzureCredentialBuilder().build())
         .endpoint(configuration.azureDTEndpoint.toString())
         .buildClient()
 
-    /** Get the current state of the Digital Twin with the provided [azureId]. */
-    fun getDTCurrentState(azureId: String): AzureDigitalTwinState? {
+    override fun getDTCurrentState(azureId: String): AzureDigitalTwinState? {
         val properties = azureClient.applySafeDigitalTwinOperation {
             getDigitalTwin(azureId, AzureJsonObject::class.java)
                 ?.apply { listOf("\$dtId", "\$etag", "\$metadata").forEach { removeProperty(it) } }
@@ -69,8 +77,7 @@ class AzureDTClient(configuration: AdapterConfiguration) {
         }
     }
 
-    /** Get the DTDL model of the Digital Twin in ADT with the provided [azureId]. */
-    fun getDTModel(azureId: String): JsonObject? = azureClient.applySafeDigitalTwinOperation {
+    override fun getDTModel(azureId: String): JsonObject? = azureClient.applySafeDigitalTwinOperation {
         getDigitalTwin(azureId, BasicDigitalTwin::class.java)
             ?.let {
                 getModel(it.metadata.modelId)
