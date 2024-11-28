@@ -108,7 +108,7 @@ class AdtPresentationTest : StringSpec({
     val dtsConfiguration = loadConfiguration("simpleConfiguration.kts")
 
     "A SignalR Digital Twin Create event should be deserialized correctly" {
-        readResourceFile("signalRCreate.json")?.let {
+        readResourceFile("./signalRCreate.json").let {
             shouldNotThrow<Exception> {
                 val event = Json.decodeFromString<SignalRDigitalTwinUpdate>(it)
                 event shouldNotBe null
@@ -118,7 +118,7 @@ class AdtPresentationTest : StringSpec({
     }
 
     "A SignalR Digital Twin Update event should be deserialized correctly" {
-        readResourceFile("signalRUpdate.json")?.let {
+        readResourceFile("./signalRUpdate.json").let {
             shouldNotThrow<Exception> {
                 val event = Json.decodeFromString<SignalRDigitalTwinUpdate>(it)
                 event shouldNotBe null
@@ -130,7 +130,7 @@ class AdtPresentationTest : StringSpec({
     }
 
     "A SignalR Digital Twin Delete event should be deserialized correctly" {
-        readResourceFile("signalRCreate.json")?.let {
+        readResourceFile("./signalRDelete.json").let {
             shouldNotThrow<Exception> {
                 val event = Json.decodeFromString<SignalRDigitalTwinUpdate>(it)
                 event shouldNotBe null
