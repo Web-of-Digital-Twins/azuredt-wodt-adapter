@@ -17,8 +17,11 @@
 package utils
 
 import configuration.AdapterDTsConfiguration
+import configuration.Configuration
+import configuration.DigitalTwinConfiguration
 import configuration.dsl.AdapterDTsConfigurationDsl
 import configuration.dsl.DslLoaderImpl
+import java.net.URI
 
 /** Module that wraps some testing utilities. */
 object TestingUtils {
@@ -30,4 +33,23 @@ object TestingUtils {
         this::class.java.classLoader.getResource(fileName)?.path.orEmpty(),
         AdapterDTsConfigurationDsl.DSL_IMPORTS,
     ) as AdapterDTsConfiguration
+
+    fun loadConfiguration(dtsConfigurationFileName: String) = (
+        DslLoaderImpl().load(
+            this::class.java.classLoader.getResource(dtsConfigurationFileName)?.path.orEmpty(),
+            AdapterDTsConfigurationDsl.DSL_IMPORTS,
+        ) as AdapterDTsConfiguration
+        ).let {
+        object : Configuration {
+            override val exposedPort: Int = 5000
+            override val exposedUrl: URI = URI.create("http://localhost:5000")
+            override val azureClientID: String = ""
+            override val azureTenantID: String = ""
+            override val azureClientSecret: String = ""
+            override val azureDTEndpoint: URI = URI.create("")
+            override val signalrNegotiationUrl: URI = URI.create("")
+            override val signalrTopicName: String = ""
+            override val digitalTwinConfigurations: Map<String, DigitalTwinConfiguration> = it.digitalTwinConfigurations
+        }
+    }
 }
