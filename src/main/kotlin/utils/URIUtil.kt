@@ -14,21 +14,18 @@
  * limitations under the License.
  */
 
-package model.dt
+package utils
 
-import configuration.Configuration
-import utils.URIUtil.relativeResolve
 import java.net.URI
 
-/** Value object that represents the DT [uri]. */
-@JvmInline
-value class DTUri(val uri: URI) {
-    /** Companion object of [DTUri]. */
-    companion object {
-        /** Resolve a [DTUri] from its [azureId] and the provided [configuration].  */
-        fun fromAzureID(azureId: String, configuration: Configuration): DTUri? =
-            configuration.digitalTwinConfigurations[azureId]?.relativeUri?.let {
-                DTUri(configuration.exposedUrl.relativeResolve(it.toString()))
-            }
+/** Module that wraps utilities for [URI]s. */
+object URIUtil {
+    /** Similar method to [URI.resolve] but that always attach the path to the end. */
+    fun URI.relativeResolve(path: String): URI {
+        var baseUri = this
+        if (!baseUri.getPath().endsWith("/")) {
+            baseUri = URI.create("$baseUri/")
+        }
+        return baseUri.resolve(path)
     }
 }
