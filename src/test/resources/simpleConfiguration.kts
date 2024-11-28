@@ -1,6 +1,6 @@
 configuration {
     dt("lampDT") {
-        relativeUri = uri("/lampDT")
+        relativeUri = uri("lampDT")
         version = DTVersion(1, 0, 0)
         physicalAssetID = "lampPA"
         platformsToRegister = listOf(uri("http://localhost:5000"), uri("http://platform.it"))
