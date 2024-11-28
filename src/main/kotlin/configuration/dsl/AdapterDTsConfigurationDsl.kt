@@ -131,7 +131,7 @@ class DigitalTwinConfigurationScope(var azureID: String) {
     lateinit var physicalAssetID: String
 
     /** The platform to automatic register the DT. */
-    lateinit var platformsToRegister: List<URI>
+    var platformsToRegister: List<URI> = listOf()
 
     private lateinit var _semantics: DigitalTwinSemantics
 
