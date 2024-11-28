@@ -39,7 +39,7 @@ import java.net.URI
 /**
  * It models the event received from Azure SignalR.
  * It contains:
- * - [dtId]
+ * - [dtId]: the Azure Digital Twin id
  * - [eventType]
  * - [eventDateTime]
  * - a list of the current [properties]
@@ -89,7 +89,7 @@ enum class SignalRDigitalTwinEventType {
  */
 fun SignalRDigitalTwinUpdate.toShadowingEvent(dtUri: DTUri, dtSemantics: DigitalTwinSemantics): ShadowingEvent =
     when (this.eventType) {
-        SignalRDigitalTwinEventType.CREATE -> CreateEvent(this.extractDTKnowledgeGraph(dtUri, dtSemantics))
+        SignalRDigitalTwinEventType.CREATE -> CreateEvent(this.dtId, this.extractDTKnowledgeGraph(dtUri, dtSemantics))
         SignalRDigitalTwinEventType.UPDATE -> UpdateEvent(this.extractDTKnowledgeGraph(dtUri, dtSemantics))
         SignalRDigitalTwinEventType.DELETE -> DeleteEvent(dtUri)
     }

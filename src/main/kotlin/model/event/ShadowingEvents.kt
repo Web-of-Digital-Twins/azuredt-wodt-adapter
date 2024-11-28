@@ -22,8 +22,8 @@ import model.semantics.rdf.DTKnowledgeGraph
 /** Interface that models the shadowing events to be dispatched through the system. */
 sealed interface ShadowingEvent
 
-/** This class models the event of the creation of a DT with its [dtKnowledgeGraph]. */
-data class CreateEvent(val dtKnowledgeGraph: DTKnowledgeGraph) : ShadowingEvent
+/** This class models the event of the creation of a DT with id [azureDtId] with its converted [dtKnowledgeGraph]. */
+data class CreateEvent(val azureDtId: String, val dtKnowledgeGraph: DTKnowledgeGraph) : ShadowingEvent
 
 /** This class models the event of the update of a DT with its [dtKnowledgeGraph]. */
 data class UpdateEvent(val dtKnowledgeGraph: DTKnowledgeGraph) : ShadowingEvent
