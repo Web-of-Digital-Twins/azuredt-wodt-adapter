@@ -84,6 +84,35 @@ enum class SignalRDigitalTwinEventType {
 }
 
 /**
+ * Internal representation of the current state of an Azure Digital Twin, as returned by the Azure SDK.
+ * The important aspects are:
+ * - [dtId]
+ * - [properties]
+ * - [relationships]
+ *
+ * It is separated from [SignalRDigitalTwinUpdate] in order to enable independent evolution.
+ */
+data class AzureDigitalTwinState(
+    val dtId: String,
+    val properties: Map<String, JsonPrimitive> = mapOf(),
+    val relationships: List<AzureDigitalTwinRelationship> = listOf(),
+)
+
+/**
+ * Internal representation of an Azure Digital Twin relationship, as returned by the Azure SDK.
+ * The important aspects are:
+ * - [relationshipName]
+ * - [targetId]
+ * - [external]
+ * * It is separated from [SignalRDigitalTwinRelationship] in order to enable independent evolution.
+ */
+data class AzureDigitalTwinRelationship(
+    val relationshipName: String,
+    val targetId: String,
+    val external: Boolean,
+)
+
+/**
  * It converts a [SignalRDigitalTwinUpdate] to a [ShadowingEvent]. The [ShadowingEvent] is built based on the provided
  * [dtUri] and [dtSemantics].
  */
@@ -105,6 +134,17 @@ fun SignalRDigitalTwinUpdate.extractDTKnowledgeGraph(
             dtSemantics.mapData(propertyName, jsonValue.toPrimitive()).orEmpty()
         } + this.relationships.flatMap { (_, relationshipName, targetID, _) ->
             dtSemantics.mapData(relationshipName, DTUri(URI.create(targetID))).orEmpty()
+        },
+    )
+
+/** It extracts the [DTKnowledgeGraph] from a [AzureDigitalTwinState] of a [dtUri], following its [dtSemantics]. */
+fun AzureDigitalTwinState.extractDTKnowledgeGraph(dtUri: DTUri, dtSemantics: DigitalTwinSemantics): DTKnowledgeGraph =
+    DTKnowledgeGraph(
+        dtUri,
+        this.properties.flatMap { (propertyName, jsonValue) ->
+            dtSemantics.mapData(propertyName, jsonValue.toPrimitive()).orEmpty()
+        } + this.relationships.flatMap { (relationshipName, targetId, _) ->
+            dtSemantics.mapData(relationshipName, DTUri(URI.create(targetId))).orEmpty()
         },
     )
 
