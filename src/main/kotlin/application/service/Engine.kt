@@ -20,13 +20,16 @@ import application.component.ShadowingAdapter
 import io.github.oshai.kotlinlogging.KotlinLogging
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import model.event.CreateEvent
 
 /**
  * The Engine that runs the ADT WoDT Adapter.
  * It takes the:
+ * - [azureDtIdDirectory]
  * - [shadowingAdapter]
  */
 class Engine(
+    private val azureDtIdDirectory: AzureDtIdDirectory,
     private val shadowingAdapter: ShadowingAdapter,
 ) {
     /**
@@ -36,6 +39,12 @@ class Engine(
         shadowingAdapter.start()
         launch {
             shadowingAdapter.events.collect {
+                when (it) {
+                    is CreateEvent -> {
+                        azureDtIdDirectory.addDT(it.azureDtId, it.dtKnowledgeGraph.dtUri)
+                    }
+                    else -> {}
+                }
                 logger.info { it }
             }
         }
