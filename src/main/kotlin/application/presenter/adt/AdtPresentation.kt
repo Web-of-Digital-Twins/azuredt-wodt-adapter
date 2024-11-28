@@ -89,13 +89,16 @@ enum class SignalRDigitalTwinEventType {
  */
 fun SignalRDigitalTwinUpdate.toShadowingEvent(dtUri: DTUri, dtSemantics: DigitalTwinSemantics): ShadowingEvent =
     when (this.eventType) {
-        SignalRDigitalTwinEventType.CREATE -> CreateEvent(this.toDTKnowledgeGraph(dtUri, dtSemantics))
-        SignalRDigitalTwinEventType.UPDATE -> UpdateEvent(this.toDTKnowledgeGraph(dtUri, dtSemantics))
+        SignalRDigitalTwinEventType.CREATE -> CreateEvent(this.extractDTKnowledgeGraph(dtUri, dtSemantics))
+        SignalRDigitalTwinEventType.UPDATE -> UpdateEvent(this.extractDTKnowledgeGraph(dtUri, dtSemantics))
         SignalRDigitalTwinEventType.DELETE -> DeleteEvent(dtUri)
     }
 
 /** It extracts the [DTKnowledgeGraph] from a [SignalRDigitalTwinUpdate] of a [dtUri], following its [dtSemantics]. */
-fun SignalRDigitalTwinUpdate.toDTKnowledgeGraph(dtUri: DTUri, dtSemantics: DigitalTwinSemantics): DTKnowledgeGraph =
+fun SignalRDigitalTwinUpdate.extractDTKnowledgeGraph(
+    dtUri: DTUri,
+    dtSemantics: DigitalTwinSemantics,
+): DTKnowledgeGraph =
     DTKnowledgeGraph(
         dtUri,
         this.properties.flatMap { (propertyName, jsonValue) ->
