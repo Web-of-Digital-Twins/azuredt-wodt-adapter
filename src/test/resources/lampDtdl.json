@@ -1,0 +1,18 @@
+{
+    "@id":"dtmi:io:github:wodt:Lamp;1",
+    "@type":"Interface",
+    "@context":"dtmi:dtdl:context;2",
+    "displayName":"Lamp",
+    "contents": [
+        {
+            "@type": "Property",
+            "name": "luminosity",
+            "schema": "double"
+        },
+        {
+            "@type": "Relationship",
+            "name": "isInRoom",
+            "displayName": "Lamp is in Room"
+        }
+    ]
+}
