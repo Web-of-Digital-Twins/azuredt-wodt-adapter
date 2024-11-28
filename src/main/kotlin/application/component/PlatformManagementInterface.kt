@@ -48,5 +48,5 @@ interface PlatformManagementInterfaceNotifier {
 /** This interface models the reader part of the [PlatformManagementInterface] component. */
 interface PlatformManagementInterfaceReader {
     /** Obtain all the Platform URLs to which the DT, identified by its [dtUri], is registered to. */
-    operator fun get(dtUri: DTUri): Set<URI>
+    operator fun get(dtUri: DTUri): List<URI>
 }
