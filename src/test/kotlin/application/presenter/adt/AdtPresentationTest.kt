@@ -32,7 +32,7 @@ import model.semantics.rdf.RdfIndividual
 import model.semantics.rdf.RdfLiteral
 import model.semantics.rdf.RdfPredicateObjectPair
 import model.semantics.rdf.RdfProperty
-import utils.TestingUtils.loadConfiguration
+import utils.TestingUtils.loadDTsConfiguration
 import utils.TestingUtils.readResourceFile
 
 class AdtPresentationTest : StringSpec({
@@ -105,7 +105,7 @@ class AdtPresentationTest : StringSpec({
         ),
     )
 
-    val dtsConfiguration = loadConfiguration("simpleConfiguration.kts")
+    val dtsConfiguration = loadDTsConfiguration("simpleConfiguration.kts")
 
     "A SignalR Digital Twin Create event should be deserialized correctly" {
         readResourceFile("./signalRCreate.json").let {
