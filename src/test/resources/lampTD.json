@@ -1,0 +1,56 @@
+{
+  "@context": "https://www.w3.org/2022/wot/td/v1.1",
+  "id": "http://localhost:5000/lampDT",
+  "@type": [
+    "https://saref.etsi.org/core/Actuator",
+    "https://w3id.org/rec/Lamp"
+  ],
+  "version": {
+    "instance": "1.0.0",
+    "model": "1.0.0"
+  },
+  "https://purl.org/wodt/physicalAssetId": "lampPA",
+  "securityDefinitions": {
+    "nosec_sc": {
+      "scheme": "nosec"
+    }
+  },
+  "security": "nosec_sc",
+  "properties": {
+    "luminosity": {
+      "https://purl.org/wodt/domainTag": "https://purl.org/onto/LuminosityFlux",
+      "https://purl.org/wodt/augmentedInteraction": false,
+      "readOnly": true
+    },
+    "isInRoom": {
+      "https://purl.org/wodt/domainTag": "https://brickschema.org/schema/Brick#hasLocation",
+      "readOnly": true
+    }
+  },
+  "forms": [
+    {
+      "href": "ws://localhost:5000/lampDT/dtkg",
+      "subprotocol": "websocket",
+      "op": "observeallproperties"
+    }
+  ],
+  "links": [
+    {
+      "href": "http://localhost:4000",
+      "rel": "https://purl.org/wodt/registeredToPlatform"
+    },
+    {
+      "href": "http://localhost:6000",
+      "rel": "https://purl.org/wodt/registeredToPlatform"
+    },
+    {
+      "href": "https://raw.githubusercontent.com/Web-of-Digital-Twins/dtd-conceptual-model/refs/heads/main/implementations/wot/dtd-thing-model.tm.jsonld",
+      "rel": "type",
+      "type": "application/tm+json"
+    },
+    {
+      "href": "http://localhost:5000/lampDT/dtkg",
+      "rel": "https://purl.org/wodt/dtkg"
+    }
+  ]
+}
