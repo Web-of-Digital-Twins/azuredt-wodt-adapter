@@ -1,6 +1,7 @@
 import application.service.Engine
 import configuration.ConfigurationLoader
 import configuration.dsl.DslLoaderImpl
+import infrastructure.component.AzureDTClient
 import infrastructure.component.SignalRShadowingAdapter
 import kotlinx.coroutines.runBlocking
 
@@ -25,7 +26,8 @@ import kotlinx.coroutines.runBlocking
  */
 fun main(): Unit = runBlocking {
     val configuration = ConfigurationLoader(DslLoaderImpl())
-    val shadowingAdapter = SignalRShadowingAdapter(configuration)
+    val azureDTClient = AzureDTClient(configuration)
+    val shadowingAdapter = SignalRShadowingAdapter(configuration, azureDTClient)
 
     val engine = Engine(shadowingAdapter)
     engine.start()

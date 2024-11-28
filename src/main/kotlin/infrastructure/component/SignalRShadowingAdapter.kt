@@ -17,7 +17,12 @@
 package infrastructure.component
 
 import application.component.ShadowingAdapter
+import application.presenter.adt.AzureDigitalTwinRelationship
+import application.presenter.adt.AzureDigitalTwinState
+import application.presenter.adt.SignalRDigitalTwinEventType
+import application.presenter.adt.SignalRDigitalTwinRelationship
 import application.presenter.adt.SignalRDigitalTwinUpdate
+import application.presenter.adt.extractDTKnowledgeGraph
 import application.presenter.adt.toShadowingEvent
 import com.microsoft.signalr.HubConnection
 import com.microsoft.signalr.HubConnectionBuilder
@@ -31,15 +36,19 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 import model.dt.DTUri
+import model.event.CreateEvent
 import model.event.ShadowingEvent
+import java.time.LocalDateTime
 import kotlin.coroutines.CoroutineContext
 
 /**
  * This class implements a SignalR-based [ShadowingAdapter]. It is configured via its [configuration]
  * DT updates are mapped in DT snapshots by an Azure Function that are sent via SignalR to consumers.
+ * An [azureDTClient] is necessary to initialize the shadowing.
  */
 class SignalRShadowingAdapter(
     private val configuration: Configuration,
+    private val azureDTClient: AzureDTClient,
     private val context: CoroutineContext = Dispatchers.Default,
 ) : ShadowingAdapter {
     private val _events = MutableSharedFlow<ShadowingEvent>()
@@ -48,6 +57,7 @@ class SignalRShadowingAdapter(
     override val events = _events.asSharedFlow()
 
     override suspend fun start() {
+        CoroutineScope(context).launch { shadowExistingDts() }
         signalRClient.on(configuration.signalrTopicName, {
             Json.decodeFromString<SignalRDigitalTwinUpdate>(it)
                 .filterEvent()
@@ -62,6 +72,41 @@ class SignalRShadowingAdapter(
                 }
         }, String::class.java)
         signalRClient.persistentStart()
+    }
+
+    private fun shadowExistingDts() {
+        this.configuration.digitalTwinConfigurations.keys.forEach { azureDtId ->
+            val dtUri = DTUri.fromAzureID(azureDtId, configuration)
+            val semantics = configuration.digitalTwinConfigurations[azureDtId]?.semantics
+            if (dtUri != null && semantics != null) {
+                this.azureDTClient.getDTCurrentState(azureDtId)
+                    ?.filterState()
+                    ?.extractDTKnowledgeGraph(dtUri, semantics)?.let {
+                        CoroutineScope(context).launch {
+                            _events.emit(CreateEvent(azureDtId, it))
+                        }
+                    }
+            }
+        }
+    }
+
+    private fun AzureDigitalTwinState.filterState(): AzureDigitalTwinState? {
+        fun AzureDigitalTwinState.toSignalRDigitalTwinUpdate() = SignalRDigitalTwinUpdate(
+            this.dtId,
+            SignalRDigitalTwinEventType.UPDATE,
+            LocalDateTime.now().toString(),
+            this.properties,
+            this.relationships.map {
+                SignalRDigitalTwinRelationship(this.dtId, it.relationshipName, it.targetId, it.external)
+            },
+        )
+
+        fun SignalRDigitalTwinUpdate.toAzureDigitalTwinState() = AzureDigitalTwinState(
+            this.dtId,
+            this.properties,
+            this.relationships.map { AzureDigitalTwinRelationship(it.relationshipName, it.targetId, it.external) },
+        )
+        return this.toSignalRDigitalTwinUpdate().filterEvent()?.toAzureDigitalTwinState()
     }
 
     private fun SignalRDigitalTwinUpdate.filterEvent() =
