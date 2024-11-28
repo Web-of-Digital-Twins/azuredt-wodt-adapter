@@ -26,7 +26,7 @@ object TestingUtils {
     fun readResourceFile(fileName: String) =
         checkNotNull(this::class.java.getClassLoader().getResource(fileName)?.readText(Charsets.UTF_8))
 
-    fun loadConfiguration(fileName: String) = DslLoaderImpl().load(
+    fun loadDTsConfiguration(fileName: String) = DslLoaderImpl().load(
         this::class.java.classLoader.getResource(fileName)?.path.orEmpty(),
         AdapterDTsConfigurationDsl.DSL_IMPORTS,
     ) as AdapterDTsConfiguration
