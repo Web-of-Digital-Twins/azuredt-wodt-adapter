@@ -19,10 +19,10 @@ configuration {
                         listOf(
                             RdfPredicateObjectPair(
                                 RdfProperty(uri("https://saref.etsi.org/core/hasProperty")),
-                                RdfIndividual(uri("\"https://purl.org/onto/LuminosityFlux\"")),
+                                RdfIndividual(uri("https://purl.org/onto/LuminosityFlux")),
                             ),
                             RdfPredicateObjectPair(
-                                RdfProperty(uri("\"https://saref.etsi.org/core/hasPropertyValue\"")),
+                                RdfProperty(uri("https://saref.etsi.org/core/hasPropertyValue")),
                                 RdfBlankNode(
                                     "luminosityValue",
                                     listOf(
