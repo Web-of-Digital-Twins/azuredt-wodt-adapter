@@ -36,10 +36,11 @@ import utils.TestingUtils.loadDTsConfiguration
 import utils.TestingUtils.readResourceFile
 
 class AdtPresentationTest : StringSpec({
+    val azureDtId = "lampDT"
     val dtUri = DTUri(uri("http://uri.com"))
 
     val signalRDTUpdate = SignalRDigitalTwinUpdate(
-        dtId = "lampDT",
+        dtId = azureDtId,
         eventType = SignalRDigitalTwinEventType.UPDATE,
         eventDateTime = "2024-01-01T10:00:00",
         mapOf(
@@ -47,7 +48,7 @@ class AdtPresentationTest : StringSpec({
         ),
         listOf(
             SignalRDigitalTwinRelationship(
-                sourceId = "lampDT",
+                sourceId = azureDtId,
                 relationshipName = "isInRoom",
                 targetId = "http://example.com",
                 external = true,
@@ -56,13 +57,13 @@ class AdtPresentationTest : StringSpec({
     )
 
     val signalRDTDelete = SignalRDigitalTwinUpdate(
-        dtId = "lampDT",
+        dtId = azureDtId,
         eventType = SignalRDigitalTwinEventType.DELETE,
         eventDateTime = "2024-01-01T10:00:00",
     )
 
     val azureDTState = AzureDigitalTwinState(
-        dtId = "lampDT",
+        dtId = azureDtId,
         mapOf(
             "luminosity" to JsonPrimitive(100),
         ),
@@ -159,7 +160,7 @@ class AdtPresentationTest : StringSpec({
         }
 
         signalRDTUpdate.toShadowingEvent(dtUri, semantics) shouldBe
-            UpdateEvent(signalRDTUpdate.extractDTKnowledgeGraph(dtUri, semantics))
+            UpdateEvent(azureDtId, signalRDTUpdate.extractDTKnowledgeGraph(dtUri, semantics))
     }
 
     "A Digital Twin Delete event should be converted in a Delete Shadowing event" {
