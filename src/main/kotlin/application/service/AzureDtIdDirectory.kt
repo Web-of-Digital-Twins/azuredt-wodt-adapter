@@ -24,6 +24,9 @@ import model.dt.DTUri
 interface AzureDtIdDirectory : AzureDtIdDirectoryReader {
     /** Add an [azureDtId] mapped to a [dtUri] to the directory. */
     suspend fun addDT(azureDtId: String, dtUri: DTUri)
+
+    /** Remove [dtUri] mapping. */
+    suspend fun removeDT(dtUri: DTUri)
 }
 
 /** Interface that models the reader part of the [AzureDtIdDirectory]. */
@@ -39,6 +42,10 @@ class AzureDtIdDirectoryImpl : AzureDtIdDirectory {
 
     override suspend fun addDT(azureDtId: String, dtUri: DTUri) = mutex.withLock {
         directory = directory + (dtUri to azureDtId)
+    }
+
+    override suspend fun removeDT(dtUri: DTUri) {
+        directory = directory - dtUri
     }
 
     override suspend fun get(dtUri: DTUri): String? = mutex.withLock {
