@@ -119,7 +119,7 @@ data class AzureDigitalTwinRelationship(
 fun SignalRDigitalTwinUpdate.toShadowingEvent(dtUri: DTUri, dtSemantics: DigitalTwinSemantics): ShadowingEvent =
     when (this.eventType) {
         SignalRDigitalTwinEventType.CREATE -> CreateEvent(this.dtId, this.extractDTKnowledgeGraph(dtUri, dtSemantics))
-        SignalRDigitalTwinEventType.UPDATE -> UpdateEvent(this.extractDTKnowledgeGraph(dtUri, dtSemantics))
+        SignalRDigitalTwinEventType.UPDATE -> UpdateEvent(this.dtId, this.extractDTKnowledgeGraph(dtUri, dtSemantics))
         SignalRDigitalTwinEventType.DELETE -> DeleteEvent(dtUri)
     }
 
