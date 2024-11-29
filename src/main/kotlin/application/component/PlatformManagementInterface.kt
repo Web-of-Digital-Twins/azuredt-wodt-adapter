@@ -22,10 +22,11 @@ import java.net.URI
 /** This interface models the Platform Management Interface component. */
 interface PlatformManagementInterface : PlatformManagementInterfaceReader, PlatformManagementInterfaceNotifier {
     /**
-     * Request the registration of the DT, identified by its [dtUri], to the WoDT Platform at [platformUrl].
+     * Request the registration of the DT, identified by its [dtUri] and described by its [rawDtd],
+     * to the WoDT Platform at [platformUrl].
      * Returns true if successful and not already registered, false instead.
      */
-    fun requestPlatformRegistration(dtUri: DTUri, platformUrl: URI): Boolean
+    suspend fun requestPlatformRegistration(platformUrl: URI, dtUri: DTUri, rawDtd: String): Boolean
 
     /**
      * Signal to the Platform Management Interface the deletion of the managed Digital Twin with [dtUri].
@@ -33,7 +34,7 @@ interface PlatformManagementInterface : PlatformManagementInterfaceReader, Platf
      * which it is registered.
      * Returns true if successful, false instead.
      */
-    fun signalDTDeletion(dtUri: DTUri): Boolean
+    suspend fun signalDTDeletion(dtUri: DTUri): Boolean
 }
 
 /** This interface models the external notifier part of the [PlatformManagementInterface] component. */
