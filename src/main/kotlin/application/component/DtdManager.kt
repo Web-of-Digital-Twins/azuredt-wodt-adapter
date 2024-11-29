@@ -16,7 +16,6 @@
 
 package application.component
 
-import kotlinx.coroutines.Deferred
 import org.eclipse.ditto.wot.model.ThingDescription
 
 /** This interface models the DTD Manager component. */
@@ -25,5 +24,5 @@ interface DtdManager {
      * Obtain the Digital Twin Description of the Azure DT with the provided [azureDtId].
      * The adapter implements the DTD with the Thing Description.
      */
-    suspend operator fun get(azureDtId: String): Deferred<ThingDescription?>
+    suspend operator fun get(azureDtId: String): ThingDescription?
 }

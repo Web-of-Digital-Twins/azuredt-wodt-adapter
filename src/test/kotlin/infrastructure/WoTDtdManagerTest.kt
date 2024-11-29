@@ -43,7 +43,7 @@ class WoTDtdManagerTest : StringSpec({
                 .requestPlatformRegistration(checkNotNull(DTUri.fromAzureID(azureDtId, configuration)), it)
         }
         runTest {
-            wotDtdManager[azureDtId].await()?.toJsonString() shouldBe
+            wotDtdManager[azureDtId]?.toJsonString() shouldBe
                 readResourceFile("lampTD.json").replace("\n", "").replace(" ", "")
         }
     }
