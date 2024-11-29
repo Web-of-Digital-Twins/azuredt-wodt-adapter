@@ -35,6 +35,7 @@ dependencies {
     implementation(libs.azure.identity)
     implementation(libs.azure.signalr)
     implementation(libs.ditto.wot.model)
+    implementation(libs.jena)
     implementation(libs.kotlin.coroutines)
     implementation(libs.kotlin.scripting)
     implementation(libs.kotlin.serialization.json)
