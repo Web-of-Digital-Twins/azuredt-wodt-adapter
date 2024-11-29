@@ -49,7 +49,7 @@ import kotlin.coroutines.CoroutineContext
 class SignalRShadowingAdapter(
     private val configuration: Configuration,
     private val azureDTClient: AzureDTClient,
-    private val context: CoroutineContext = Dispatchers.Default,
+    private val context: CoroutineContext = Dispatchers.IO,
 ) : ShadowingAdapter {
     private val _events = MutableSharedFlow<ShadowingEvent>()
     private val signalRClient = HubConnectionBuilder.create(configuration.signalrNegotiationUrl.toString()).build()
