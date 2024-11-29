@@ -16,11 +16,19 @@
 
 package application.service
 
+import application.component.DtdManager
+import application.component.DtkgEngine
+import application.component.PlatformManagementInterface
 import application.component.ShadowingAdapter
+import application.component.WebServer
+import configuration.Configuration
 import io.github.oshai.kotlinlogging.KotlinLogging
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import model.dt.DTUri
 import model.event.CreateEvent
+import model.event.DeleteEvent
+import model.event.UpdateEvent
 
 /**
  * The Engine that runs the ADT WoDT Adapter.
@@ -29,8 +37,13 @@ import model.event.CreateEvent
  * - [shadowingAdapter]
  */
 class Engine(
+    private val configuration: Configuration,
     private val azureDtIdDirectory: AzureDtIdDirectory,
     private val shadowingAdapter: ShadowingAdapter,
+    private val dtkgEngine: DtkgEngine,
+    private val dtdManager: DtdManager,
+    private val platformManagementInterface: PlatformManagementInterface,
+    private val webServer: WebServer,
 ) {
     /**
      * Start the engine.
@@ -39,13 +52,53 @@ class Engine(
         shadowingAdapter.start()
         launch {
             shadowingAdapter.events.collect {
+                logger.info { it }
                 when (it) {
                     is CreateEvent -> {
                         azureDtIdDirectory.addDT(it.azureDtId, it.dtKnowledgeGraph.dtUri)
+                        launch {
+                            registerDigitalTwinToDefaultPlatforms(
+                                it.azureDtId,
+                                it.dtKnowledgeGraph.dtUri,
+                                dtdManager,
+                                platformManagementInterface,
+                            )
+                        }
+                        dtkgEngine.updateSingleDT(it.azureDtId, it.dtKnowledgeGraph)
                     }
-                    else -> {}
+                    is DeleteEvent -> {
+                        azureDtIdDirectory.removeDT(it.dtUri)
+                        launch { platformManagementInterface.signalDTDeletion(it.dtUri) }
+                        dtkgEngine.deleteSingleDT(it.dtUri)
+                    }
+                    is UpdateEvent -> {
+                        dtkgEngine.updateSingleDT(it.azureDtId, it.dtKnowledgeGraph)
+                    }
                 }
-                logger.info { it }
+            }
+        }
+        webServer.start()
+    }
+
+    private suspend fun registerDigitalTwinToDefaultPlatforms(
+        azureDtId: String,
+        dtUri: DTUri,
+        dtdManager: DtdManager,
+        platformManagementInterface: PlatformManagementInterface,
+    ) {
+        coroutineScope {
+            dtdManager[azureDtId]?.also { dtd ->
+                configuration.digitalTwinConfigurations[azureDtId]
+                    ?.platformsToRegister
+                    ?.forEach { platform ->
+                        launch {
+                            platformManagementInterface.requestPlatformRegistration(
+                                platform,
+                                dtUri,
+                                dtd.toJsonString(),
+                            )
+                        }
+                    }
             }
         }
     }

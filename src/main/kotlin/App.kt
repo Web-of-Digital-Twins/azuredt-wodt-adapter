@@ -1,11 +1,3 @@
-import application.service.AzureDtIdDirectoryImpl
-import application.service.Engine
-import configuration.ConfigurationLoader
-import configuration.dsl.DslLoaderImpl
-import infrastructure.component.AzureDTClientImpl
-import infrastructure.component.SignalRShadowingAdapter
-import kotlinx.coroutines.runBlocking
-
 /*
  * Copyright (c) 2024. Andrea Giulianelli
  *
@@ -22,15 +14,41 @@ import kotlinx.coroutines.runBlocking
  * limitations under the License.
  */
 
+import application.service.AzureDtIdDirectoryImpl
+import application.service.Engine
+import application.service.PlatformManagementInterfaceImpl
+import configuration.ConfigurationLoader
+import configuration.dsl.DslLoaderImpl
+import infrastructure.component.AdapterHttpClientImpl
+import infrastructure.component.AdapterWebServer
+import infrastructure.component.AzureDTClientImpl
+import infrastructure.component.JenaDtkgEngine
+import infrastructure.component.SignalRShadowingAdapter
+import infrastructure.component.WoTDtdManager
+import kotlinx.coroutines.runBlocking
+
 /**
  * Entry point of the Azure Digital Twins WoDT Adapter.
  */
 fun main(): Unit = runBlocking {
     val configuration = ConfigurationLoader(DslLoaderImpl())
+    val httpClient = AdapterHttpClientImpl()
     val azureDTClient = AzureDTClientImpl(configuration)
     val azureDtIdDirectory = AzureDtIdDirectoryImpl()
     val shadowingAdapter = SignalRShadowingAdapter(configuration, azureDTClient)
+    val platformManagementInterface = PlatformManagementInterfaceImpl(httpClient)
+    val dtdManager = WoTDtdManager(configuration, azureDTClient, platformManagementInterface)
+    val dtkgEngine = JenaDtkgEngine(configuration)
+    val webServer = AdapterWebServer(configuration, platformManagementInterface)
 
-    val engine = Engine(azureDtIdDirectory, shadowingAdapter)
+    val engine = Engine(
+        configuration,
+        azureDtIdDirectory,
+        shadowingAdapter,
+        dtkgEngine,
+        dtdManager,
+        platformManagementInterface,
+        webServer,
+    )
     engine.start()
 }
