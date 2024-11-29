@@ -17,9 +17,9 @@
 package application.component
 
 import kotlinx.coroutines.flow.Flow
+import model.dt.DTUri
 import model.dt.Dtkg
 import model.semantics.rdf.DTKnowledgeGraph
-import java.net.URI
 
 /** This interface models the DTKG Engine component. */
 interface DtkgEngine : DtkgEngineWriter, DtkgEngineReader
@@ -30,14 +30,14 @@ interface DtkgEngineReader {
     val dtkgs: Flow<Dtkg>
 
     /** Get the current DTKG of a DT identified by its [dtUri]. */
-    fun dtkg(dtUri: URI): Dtkg?
+    operator fun get(dtUri: DTUri): Dtkg?
 }
 
 /** This interface models the writer part of the [DtkgEngine] component. */
 interface DtkgEngineWriter {
-    /** Update the [dtKnowledgeGraph] of a single DT. */
-    fun updateSingleDT(dtKnowledgeGraph: DTKnowledgeGraph): Boolean
+    /** Update the [dtKnowledgeGraph] of a single DT with id [azureDtId]. */
+    fun updateSingleDT(azureDtId: String, dtKnowledgeGraph: DTKnowledgeGraph)
 
     /** Delete a DT with [dtUri]. */
-    fun deleteSingleDT(dtUri: URI): Boolean
+    fun deleteSingleDT(dtUri: DTUri): Boolean
 }

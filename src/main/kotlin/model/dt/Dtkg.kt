@@ -16,7 +16,5 @@
 
 package model.dt
 
-import java.net.URI
-
 /** This class models the [dtkg] of a DT with uri [dtUri]. */
-data class Dtkg(val dtUri: URI, val dtkg: String)
+data class Dtkg(val dtUri: DTUri, val dtkg: String)
