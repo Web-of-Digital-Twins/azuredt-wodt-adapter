@@ -31,7 +31,7 @@ import kotlin.coroutines.CoroutineContext
  * A Digital Twin Description (DTD) Manager implementation that convert Azure Digital Twins DTDL
  * models to WoT Thing Descriptions.
  * It exploits the input [configuration] and its tasks will be executed within the provided [context].
- * The [azureDTClient] and [azureDtIdDirectory] will be exploited to retrieve the DTDL models.
+ * The [azureDTClient] will be exploited to retrieve the DTDL models.
  * Instead, the [platformManagementInterfaceReader] will be exploited to retrieve the platform to which
  * the DT is registered.
  */
