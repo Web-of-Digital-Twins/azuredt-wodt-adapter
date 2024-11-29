@@ -16,9 +16,11 @@
 
 package application.service
 
+import configuration.AdapterConfiguration
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import model.dt.DTUri
+import java.net.URI
 
 /** Interface that models a directory that translates from DT URIs to Azure DT ids. */
 interface AzureDtIdDirectory : AzureDtIdDirectoryReader {
@@ -33,10 +35,13 @@ interface AzureDtIdDirectory : AzureDtIdDirectoryReader {
 interface AzureDtIdDirectoryReader {
     /** Get the azure DT id associated to the [dtUri]. */
     suspend operator fun get(dtUri: DTUri): String?
+
+    /** Get the azure DT id associated to the [dtRelativeUri]. */
+    suspend fun getFromRelative(dtRelativeUri: URI): String?
 }
 
 /** Simple implementation of the [AzureDtIdDirectory]. It is coroutine compatible and thread-safe. */
-class AzureDtIdDirectoryImpl : AzureDtIdDirectory {
+class AzureDtIdDirectoryImpl(private val configuration: AdapterConfiguration) : AzureDtIdDirectory {
     private val mutex = Mutex()
     private var directory: Map<DTUri, String> = mapOf()
 
@@ -50,5 +55,9 @@ class AzureDtIdDirectoryImpl : AzureDtIdDirectory {
 
     override suspend fun get(dtUri: DTUri): String? = mutex.withLock {
         directory[dtUri]
+    }
+
+    override suspend fun getFromRelative(dtRelativeUri: URI): String? = mutex.withLock {
+        directory.mapKeys { (dtUri, _) -> configuration.exposedUrl.relativize(dtUri.uri) }[dtRelativeUri]
     }
 }
