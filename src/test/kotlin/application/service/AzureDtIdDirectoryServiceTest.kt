@@ -17,23 +17,15 @@
 package application.service
 
 import configuration.Configuration
-import configuration.DigitalTwinConfiguration
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 import model.dt.DTUri
+import utils.TestingUtils.loadConfiguration
 import java.net.URI
 
 class AzureDtIdDirectoryServiceTest : StringSpec({
-    val configuration = object : Configuration {
-        override val exposedPort: Int = 5000
+    val configuration = object : Configuration by checkNotNull(loadConfiguration("simpleConfiguration.kts")) {
         override val exposedUrl: URI = URI.create("http://localhost:5000/platform")
-        override val azureClientID: String = ""
-        override val azureTenantID: String = ""
-        override val azureClientSecret: String = ""
-        override val azureDTEndpoint: URI = URI.create("")
-        override val signalrNegotiationUrl: URI = URI.create("")
-        override val signalrTopicName: String = ""
-        override val digitalTwinConfigurations: Map<String, DigitalTwinConfiguration> = mapOf()
     }
     val azureDtId = "lampDT"
     val dtUri = DTUri(URI.create("http://localhost:5000/platform/somePath/lampDT"))
