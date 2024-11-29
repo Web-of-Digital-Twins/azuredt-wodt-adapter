@@ -24,12 +24,12 @@ import java.net.URI
 class PlatformManagementInterfaceTestDouble : PlatformManagementInterface {
     val registrations: MutableMap<DTUri, MutableList<URI>> = mutableMapOf()
 
-    override fun requestPlatformRegistration(dtUri: DTUri, platformUrl: URI): Boolean {
+    override suspend fun requestPlatformRegistration(platformUrl: URI, dtUri: DTUri, rawDtd: String): Boolean {
         registrations.getOrPut(dtUri) { mutableListOf() } += platformUrl
         return true
     }
 
-    override fun signalDTDeletion(dtUri: DTUri): Boolean {
+    override suspend fun signalDTDeletion(dtUri: DTUri): Boolean {
         registrations.remove(dtUri)
         return true
     }
@@ -39,6 +39,7 @@ class PlatformManagementInterfaceTestDouble : PlatformManagementInterface {
     }
 
     override fun notifyNewRegistration(dtUri: DTUri, platformUrl: URI): Boolean {
-        return this.requestPlatformRegistration(dtUri, platformUrl)
+        registrations.getOrPut(dtUri) { mutableListOf() } += platformUrl
+        return true
     }
 }

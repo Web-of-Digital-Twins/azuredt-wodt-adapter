@@ -40,7 +40,7 @@ class WoTDtdManagerTest : StringSpec({
     "it should be possible to load the DTD of an Azure Digital Twin for which a configuration is available" {
         listOf("http://localhost:4000", "http://localhost:6000").map { URI.create(it) }.forEach {
             platformManagementInterface
-                .requestPlatformRegistration(checkNotNull(DTUri.fromAzureID(azureDtId, configuration)), it)
+                .requestPlatformRegistration(it, checkNotNull(DTUri.fromAzureID(azureDtId, configuration)), "")
         }
         runTest {
             wotDtdManager[azureDtId]?.toJsonString() shouldBe
