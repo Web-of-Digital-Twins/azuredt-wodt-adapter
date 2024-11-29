@@ -20,10 +20,9 @@ import application.component.DtdManager
 import application.component.PlatformManagementInterfaceReader
 import application.presenter.adt.DtdlPresentation.toWoTThingDescription
 import configuration.Configuration
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import model.dt.DTUri
 import org.eclipse.ditto.wot.model.ThingDescription
 import kotlin.coroutines.CoroutineContext
@@ -40,19 +39,21 @@ class WoTDtdManager(
     private val configuration: Configuration,
     private val azureDTClient: AzureDTClient,
     private val platformManagementInterfaceReader: PlatformManagementInterfaceReader,
-    private val context: CoroutineContext = Dispatchers.Default,
+    private val context: CoroutineContext = Dispatchers.IO,
 ) : DtdManager {
-    override suspend operator fun get(azureDtId: String): Deferred<ThingDescription?> =
-        CoroutineScope(context).async {
-            DTUri.fromAzureID(azureDtId, configuration)?.let { dtUri ->
-                configuration.digitalTwinConfigurations[azureDtId]?.let { dtConfiguration ->
-                    azureDTClient.getDTModel(azureDtId)
-                        ?.toWoTThingDescription(
-                            dtUri,
-                            platformManagementInterfaceReader[dtUri],
-                            dtConfiguration,
-                        )
+    override suspend operator fun get(azureDtId: String): ThingDescription? =
+        coroutineScope {
+            async(context) {
+                DTUri.fromAzureID(azureDtId, configuration)?.let { dtUri ->
+                    configuration.digitalTwinConfigurations[azureDtId]?.let { dtConfiguration ->
+                        azureDTClient.getDTModel(azureDtId)
+                            ?.toWoTThingDescription(
+                                dtUri,
+                                platformManagementInterfaceReader[dtUri],
+                                dtConfiguration,
+                            )
+                    }
                 }
-            }
+            }.await()
         }
 }
