@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import application.service.AzureDtIdDirectoryImpl
+import application.service.AzureDtIdDirectoryService
 import application.service.Engine
 import application.service.PlatformManagementInterfaceImpl
 import configuration.ConfigurationLoader
@@ -34,7 +34,7 @@ fun main(): Unit = runBlocking {
     val configuration = ConfigurationLoader(DslLoaderImpl())
     val httpClient = AdapterHttpClientImpl()
     val azureDTClient = AzureDTClientImpl(configuration)
-    val azureDtIdDirectory = AzureDtIdDirectoryImpl(configuration)
+    val azureDtIdDirectory = AzureDtIdDirectoryService(configuration)
     val shadowingAdapter = SignalRShadowingAdapter(configuration, azureDTClient)
     val platformManagementInterface = PlatformManagementInterfaceImpl(httpClient)
     val dtdManager = WoTDtdManager(configuration, azureDTClient, platformManagementInterface)

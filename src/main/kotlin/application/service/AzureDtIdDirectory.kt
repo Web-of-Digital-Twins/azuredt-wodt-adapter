@@ -41,7 +41,7 @@ interface AzureDtIdDirectoryReader {
 }
 
 /** Simple implementation of the [AzureDtIdDirectory]. It is coroutine compatible and thread-safe. */
-class AzureDtIdDirectoryImpl(private val configuration: AdapterConfiguration) : AzureDtIdDirectory {
+class AzureDtIdDirectoryService(private val configuration: AdapterConfiguration) : AzureDtIdDirectory {
     private val mutex = Mutex()
     private var directory: Map<DTUri, String> = mapOf()
 
