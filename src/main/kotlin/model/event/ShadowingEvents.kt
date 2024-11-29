@@ -25,8 +25,8 @@ sealed interface ShadowingEvent
 /** This class models the event of the creation of a DT with id [azureDtId] with its converted [dtKnowledgeGraph]. */
 data class CreateEvent(val azureDtId: String, val dtKnowledgeGraph: DTKnowledgeGraph) : ShadowingEvent
 
-/** This class models the event of the update of a DT with its [dtKnowledgeGraph]. */
-data class UpdateEvent(val dtKnowledgeGraph: DTKnowledgeGraph) : ShadowingEvent
+/** This class models the event of the update of a DT with id [azureDtId] with its [dtKnowledgeGraph]. */
+data class UpdateEvent(val azureDtId: String, val dtKnowledgeGraph: DTKnowledgeGraph) : ShadowingEvent
 
 /** This class models the event of the deletion of the digital twin identified by [dtUri]. */
 data class DeleteEvent(val dtUri: DTUri) : ShadowingEvent
