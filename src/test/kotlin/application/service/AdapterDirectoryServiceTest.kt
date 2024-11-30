@@ -23,7 +23,7 @@ import model.dt.DTUri
 import utils.TestingUtils.loadConfiguration
 import java.net.URI
 
-class AzureDtIdDirectoryServiceTest : StringSpec({
+class AdapterDirectoryServiceTest : StringSpec({
     val configuration = object : Configuration by checkNotNull(loadConfiguration("simpleConfiguration.kts")) {
         override val exposedUrl: URI = URI.create("http://localhost:5000/platform")
     }
@@ -32,19 +32,25 @@ class AzureDtIdDirectoryServiceTest : StringSpec({
     val relativeDtUri = URI.create("somePath/lampDT")
 
     "it should be possible to retrieve the azure id of a added dt uri" {
-        val directory = AzureDtIdDirectoryService(configuration)
+        val directory = AdapterDirectoryService(configuration)
         directory.addDT(azureDtId, dtUri)
         directory[dtUri] shouldBe azureDtId
     }
 
     "it should not be possible to retrieve the azure if of a not-existent dt uri" {
-        val directory = AzureDtIdDirectoryService(configuration)
+        val directory = AdapterDirectoryService(configuration)
         directory[dtUri] shouldBe null
     }
 
     "it should be possible to retrieve the azure id of a added dt uri, passing the relative dt uri" {
-        val directory = AzureDtIdDirectoryService(configuration)
+        val directory = AdapterDirectoryService(configuration)
         directory.addDT(azureDtId, dtUri)
         directory.getFromRelative(relativeDtUri) shouldBe azureDtId
+    }
+
+    "it should be possible to obtain the DT URI from its relative uri" {
+        val directory = AdapterDirectoryService(configuration)
+        directory.addDT(azureDtId, dtUri)
+        directory.getDTUriFromRelative(relativeDtUri) shouldBe dtUri
     }
 })
