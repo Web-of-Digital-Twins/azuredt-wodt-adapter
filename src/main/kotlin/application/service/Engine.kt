@@ -33,12 +33,12 @@ import model.event.UpdateEvent
 /**
  * The Engine that runs the ADT WoDT Adapter.
  * It takes the:
- * - [azureDtIdDirectory]
+ * - [adapterDirectory]
  * - [shadowingAdapter]
  */
 class Engine(
     private val configuration: Configuration,
-    private val azureDtIdDirectory: AzureDtIdDirectory,
+    private val adapterDirectory: AdapterDirectory,
     private val shadowingAdapter: ShadowingAdapter,
     private val dtkgEngine: DtkgEngine,
     private val dtdManager: DtdManager,
@@ -55,7 +55,7 @@ class Engine(
                 logger.info { it }
                 when (it) {
                     is CreateEvent -> {
-                        azureDtIdDirectory.addDT(it.azureDtId, it.dtKnowledgeGraph.dtUri)
+                        adapterDirectory.addDT(it.azureDtId, it.dtKnowledgeGraph.dtUri)
                         launch {
                             registerDigitalTwinToDefaultPlatforms(
                                 it.azureDtId,
@@ -67,7 +67,7 @@ class Engine(
                         dtkgEngine.updateSingleDT(it.azureDtId, it.dtKnowledgeGraph)
                     }
                     is DeleteEvent -> {
-                        azureDtIdDirectory.removeDT(it.dtUri)
+                        adapterDirectory.removeDT(it.dtUri)
                         launch { platformManagementInterface.signalDTDeletion(it.dtUri) }
                         dtkgEngine.deleteSingleDT(it.dtUri)
                     }

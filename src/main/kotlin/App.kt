@@ -34,7 +34,7 @@ fun main(): Unit = runBlocking {
     val configuration = ConfigurationLoader(DslLoaderImpl())
     val httpClient = AdapterHttpClientImpl()
     val azureDTClient = AzureDTClientImpl(configuration)
-    val azureDtIdDirectory = AzureDtIdDirectoryService(configuration)
+    val adapterDirectory = AdapterDirectoryService(configuration)
     val shadowingAdapter = SignalRShadowingAdapter(configuration, azureDTClient)
     val platformManagementInterface = PlatformManagementInterfaceImpl(httpClient)
     val dtdManager = WoTDtdManager(configuration, azureDTClient, platformManagementInterface)
@@ -43,7 +43,7 @@ fun main(): Unit = runBlocking {
 
     val engine = Engine(
         configuration,
-        azureDtIdDirectory,
+        adapterDirectory,
         shadowingAdapter,
         dtkgEngine,
         dtdManager,
