@@ -16,10 +16,14 @@
 
 package infrastructure.component
 
+import application.component.DtdManager
+import application.component.DtkgEngineReader
 import application.component.PlatformManagementInterfaceNotifier
 import application.component.WebServer
+import application.service.AdapterDirectoryReader
 import configuration.AdapterConfiguration
 import infrastructure.component.api.platformManagementInterfaceApi
+import infrastructure.component.api.wodtDigitalTwinInterfaceApi
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
@@ -31,6 +35,9 @@ import io.ktor.server.websocket.WebSockets
 /** This class implements the Adapter [WebServer] that manages all the exposed APIs of the Adapter. */
 class AdapterWebServer(
     private val configuration: AdapterConfiguration,
+    private val adapterDirectoryReader: AdapterDirectoryReader,
+    private val dtkgEngineReader: DtkgEngineReader,
+    private val dtdManager: DtdManager,
     private val platformManagementInterfaceNotifier: PlatformManagementInterfaceNotifier,
 ) : WebServer {
     override fun start() {
@@ -46,6 +53,7 @@ class AdapterWebServer(
     private fun dispatcher(app: Application) {
         with(app) {
             platformManagementInterfaceApi(platformManagementInterfaceNotifier)
+            wodtDigitalTwinInterfaceApi(adapterDirectoryReader, dtkgEngineReader, dtdManager)
         }
     }
 }
