@@ -22,8 +22,8 @@ import kotlinx.coroutines.sync.withLock
 import model.dt.DTUri
 import java.net.URI
 
-/** Interface that models a directory that translates from DT URIs to Azure DT ids. */
-interface AzureDtIdDirectory : AzureDtIdDirectoryReader {
+/** Interface that models the directory service of the adapter that solve DT URIs and Azure DT Ids. */
+interface AdapterDirectory : AdapterDirectoryReader {
     /** Add an [azureDtId] mapped to a [dtUri] to the directory. */
     suspend fun addDT(azureDtId: String, dtUri: DTUri)
 
@@ -31,7 +31,16 @@ interface AzureDtIdDirectory : AzureDtIdDirectoryReader {
     suspend fun removeDT(dtUri: DTUri)
 }
 
-/** Interface that models the reader part of the [AzureDtIdDirectory]. */
+/** Interface that models the reader part of the directory. */
+interface AdapterDirectoryReader : AzureDtIdDirectoryReader, DTUriDirectoryReader
+
+/** Interface that models the services needed for DT URIs. */
+interface DTUriDirectoryReader {
+    /** Get the DT URI from its [dtRelativeUri]. */
+    suspend fun getDTUriFromRelative(dtRelativeUri: URI): DTUri?
+}
+
+/** Interface that models the reader part of the [AdapterDirectory]. */
 interface AzureDtIdDirectoryReader {
     /** Get the azure DT id associated to the [dtUri]. */
     suspend operator fun get(dtUri: DTUri): String?
@@ -40,8 +49,8 @@ interface AzureDtIdDirectoryReader {
     suspend fun getFromRelative(dtRelativeUri: URI): String?
 }
 
-/** Simple implementation of the [AzureDtIdDirectory]. It is coroutine compatible and thread-safe. */
-class AzureDtIdDirectoryService(private val configuration: AdapterConfiguration) : AzureDtIdDirectory {
+/** Simple implementation of the [AdapterDirectory]. It is coroutine compatible and thread-safe. */
+class AdapterDirectoryService(private val configuration: AdapterConfiguration) : AdapterDirectory {
     private val mutex = Mutex()
     private var directory: Map<DTUri, String> = mapOf()
 
@@ -59,5 +68,9 @@ class AzureDtIdDirectoryService(private val configuration: AdapterConfiguration)
 
     override suspend fun getFromRelative(dtRelativeUri: URI): String? = mutex.withLock {
         directory.mapKeys { (dtUri, _) -> configuration.exposedUrl.relativize(dtUri.uri) }[dtRelativeUri]
+    }
+
+    override suspend fun getDTUriFromRelative(dtRelativeUri: URI): DTUri? = mutex.withLock {
+        directory.map { (dtUri, _) -> configuration.exposedUrl.relativize(dtUri.uri) to dtUri }.toMap()[dtRelativeUri]
     }
 }
