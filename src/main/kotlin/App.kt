@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import application.service.AzureDtIdDirectoryService
+import application.service.AdapterDirectoryService
 import application.service.Engine
 import application.service.PlatformManagementInterfaceImpl
 import configuration.ConfigurationLoader
@@ -39,7 +39,13 @@ fun main(): Unit = runBlocking {
     val platformManagementInterface = PlatformManagementInterfaceImpl(httpClient)
     val dtdManager = WoTDtdManager(configuration, azureDTClient, platformManagementInterface)
     val dtkgEngine = JenaDtkgEngine(configuration)
-    val webServer = AdapterWebServer(configuration, platformManagementInterface)
+    val webServer = AdapterWebServer(
+        configuration,
+        adapterDirectory,
+        dtkgEngine,
+        dtdManager,
+        platformManagementInterface,
+    )
 
     val engine = Engine(
         configuration,
