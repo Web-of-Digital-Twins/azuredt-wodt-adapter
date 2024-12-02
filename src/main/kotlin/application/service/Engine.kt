@@ -49,7 +49,6 @@ class Engine(
      * Start the engine.
      */
     suspend fun start() = coroutineScope {
-        shadowingAdapter.start()
         launch {
             shadowingAdapter.events.collect {
                 logger.info { it }
@@ -76,6 +75,10 @@ class Engine(
                     }
                 }
             }
+        }
+        launch {
+            logger.info { "Starting to extend the shadowing process..." }
+            shadowingAdapter.start()
         }
         webServer.start()
     }
