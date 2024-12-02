@@ -1,3 +1,14 @@
+## [1.0.1](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/compare/1.0.0...1.0.1) (2024-12-02)
+
+### Dependency updates
+
+* **deps:** update dependency io.github.oshai:kotlin-logging-jvm to v7.0.3 ([60ae71d](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/60ae71d4cda272cd9c8975b3eb7866e17daef846))
+* **deps:** update dependency org.eclipse.ditto:ditto-wot-model to v3.6.3 ([03688fd](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/03688fd5678489c7dc57fd24d1aa6be8d9f0860b))
+
+### Bug Fixes
+
+* correct order of components ([3423d19](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/3423d199f064e4f7cb422a26187f1e1c90009298))
+
 ## 1.0.0 (2024-11-30)
 
 ### Features
