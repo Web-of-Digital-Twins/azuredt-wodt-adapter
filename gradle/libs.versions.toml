@@ -1,7 +1,7 @@
 [versions]
 kotlin = "2.1.0"
 kotest = "5.9.1"
-ktor = "3.0.1"
+ktor = "3.0.2"
 
 [libraries]
 azure-digital-twins = { module = "com.azure:azure-digitaltwins-core", version = "1.4.0" }
