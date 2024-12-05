@@ -19,7 +19,7 @@ plugins {
     id("com.gradle.develocity") version "3.18.2"
 }
 
-rootProject.name = "kotlin-template-project"
+rootProject.name = "azuredt-wodt-adapter"
 
 develocity {
     buildScan {
