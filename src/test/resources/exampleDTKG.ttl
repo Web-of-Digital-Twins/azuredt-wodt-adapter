@@ -1,0 +1,5 @@
+<http://localhost/lampDT>
+        a                        <https://w3id.org/rec/Lamp> , <https://saref.etsi.org/core/Actuator>;
+        <http://ontology/prop>   "example";
+        <http://ontology/prop2>  [ <http://example.it/prop>
+                          <http://instance.it> ] .
