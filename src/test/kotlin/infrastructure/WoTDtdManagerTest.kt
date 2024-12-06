@@ -21,7 +21,6 @@ import infrastructure.testdouble.AzureDTClientTestDouble
 import infrastructure.testdouble.PlatformManagementInterfaceTestDouble
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
-import kotlinx.coroutines.test.runTest
 import model.dt.DTUri
 import utils.TestingUtils.loadConfiguration
 import utils.TestingUtils.readResourceFile
@@ -36,15 +35,18 @@ class WoTDtdManagerTest : StringSpec({
         AzureDTClientTestDouble(),
         platformManagementInterface,
     )
+    coroutineTestScope = true
 
     "it should be possible to load the DTD of an Azure Digital Twin for which a configuration is available" {
         listOf("http://localhost:4000", "http://localhost:6000").map { URI.create(it) }.forEach {
             platformManagementInterface
                 .requestPlatformRegistration(it, checkNotNull(DTUri.fromAzureID(azureDtId, configuration)), "")
         }
-        runTest {
-            wotDtdManager[azureDtId]?.toJsonString() shouldBe
-                readResourceFile("lampTD.json").replace("\n", "").replace(" ", "")
-        }
+        wotDtdManager[azureDtId]?.toJsonString() shouldBe
+            readResourceFile("lampTD.json").replace("\n", "").replace(" ", "")
+    }
+
+    "it should not be possible to obtain the DTD of an Azure Digital Twin for which a configuration is not available" {
+        wotDtdManager["not-existent-id"] shouldBe null
     }
 })
