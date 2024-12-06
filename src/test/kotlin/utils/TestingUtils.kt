@@ -16,11 +16,25 @@
 
 package utils
 
+import application.component.DtdManager
+import application.component.DtkgEngine
+import application.service.AdapterDirectory
+import application.service.AdapterDirectoryService
 import configuration.AdapterDTsConfiguration
 import configuration.Configuration
 import configuration.DigitalTwinConfiguration
 import configuration.dsl.AdapterDTsConfigurationDsl
 import configuration.dsl.DslLoaderImpl
+import infrastructure.component.JenaDtkgEngine
+import infrastructure.component.WoTDtdManager
+import infrastructure.component.api.wodtDigitalTwinInterfaceApi
+import infrastructure.testdouble.AzureDTClientTestDouble
+import infrastructure.testdouble.PlatformManagementInterfaceTestDouble
+import io.ktor.serialization.kotlinx.json.json
+import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.server.testing.ApplicationTestBuilder
+import io.ktor.server.testing.testApplication
+import io.ktor.server.websocket.WebSockets
 import java.net.URI
 
 /** Module that wraps some testing utilities. */
@@ -50,6 +64,34 @@ object TestingUtils {
             override val signalrNegotiationUrl: URI = URI.create("")
             override val signalrTopicName: String = ""
             override val digitalTwinConfigurations: Map<String, DigitalTwinConfiguration> = it.digitalTwinConfigurations
+        }
+    }
+
+    fun testApi(
+        tests: suspend ApplicationTestBuilder.(
+            adapterDirectory: AdapterDirectory,
+            dtkgEngine: DtkgEngine,
+            dtdManager: DtdManager,
+        ) -> Unit,
+    ) {
+        val configuration = checkNotNull(loadConfiguration("simpleConfiguration.kts"))
+        val adapterDirectory = AdapterDirectoryService(configuration)
+        val dtkgEngine = JenaDtkgEngine(configuration)
+        val dtdManager = WoTDtdManager(
+            configuration,
+            AzureDTClientTestDouble(),
+            PlatformManagementInterfaceTestDouble(),
+        )
+
+        testApplication {
+            install(WebSockets)
+            install(ContentNegotiation) {
+                json()
+            }
+            application {
+                wodtDigitalTwinInterfaceApi(adapterDirectory, dtkgEngine, dtdManager)
+            }
+            tests(adapterDirectory, dtkgEngine, dtdManager)
         }
     }
 }
