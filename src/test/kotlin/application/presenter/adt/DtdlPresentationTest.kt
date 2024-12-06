@@ -79,7 +79,7 @@ class DtdlPresentationTest : StringSpec({
             it.links.get()
                 .filter { link -> link.rel.isPresent && link.rel.get() == WoDTVocabulary.REGISTERED_TO_PLATFORM }
                 .map { link -> link.href.toString() }
-                .containsAll(platforms.map { it.toString() })
+                .containsAll(platforms.map(URI::toString))
         }
     }
 
@@ -93,12 +93,13 @@ class DtdlPresentationTest : StringSpec({
         lampDtdl[dtdlContents]?.jsonArray
             ?.filter { it.jsonObject[dtdlElementType]?.jsonPrimitive?.content == dtdlPropertyType }
             ?.mapNotNull { it.jsonObject[dtdlName]?.jsonPrimitive?.content }
-            ?.also {
-                it.forEach {
-                    dtd?.properties?.get()[it]?.also {
+            ?.also { properties ->
+                properties.forEach { propertyName ->
+                    dtd?.properties?.get()[propertyName]?.also {
                         testTDProperty(it)
-                        it.wrappedObject.any {
-                            it.key.toString() == WoDTVocabulary.AUGMENTED_INTERACTION && !it.value.asBoolean()
+                        it.wrappedObject.any { additionalMetadata ->
+                            additionalMetadata.key.toString() == WoDTVocabulary.AUGMENTED_INTERACTION &&
+                                !additionalMetadata.value.asBoolean()
                         } shouldBe true
                     } shouldNotBe null
                 }
@@ -110,12 +111,12 @@ class DtdlPresentationTest : StringSpec({
         lampDtdl[dtdlContents]?.jsonArray
             ?.filter { it.jsonObject[dtdlElementType]?.jsonPrimitive?.content != dtdlPropertyType }
             ?.mapNotNull { it.jsonObject[dtdlName]?.jsonPrimitive?.content }
-            ?.also {
-                it.forEach {
-                    dtd?.properties?.get()[it]?.also {
+            ?.also { relationships ->
+                relationships.forEach { relationship ->
+                    dtd?.properties?.get()[relationship]?.also {
                         testTDProperty(it)
-                        it.wrappedObject.any {
-                            it.key.toString() == WoDTVocabulary.AUGMENTED_INTERACTION
+                        it.wrappedObject.any { additionalMetadata ->
+                            additionalMetadata.key.toString() == WoDTVocabulary.AUGMENTED_INTERACTION
                         } shouldBe false
                     } shouldNotBe null
                 }
