@@ -18,8 +18,10 @@ package utils
 
 import application.component.DtdManager
 import application.component.DtkgEngine
+import application.component.PlatformManagementInterface
 import application.service.AdapterDirectory
 import application.service.AdapterDirectoryService
+import application.service.PlatformManagementInterfaceImpl
 import configuration.AdapterDTsConfiguration
 import configuration.Configuration
 import configuration.DigitalTwinConfiguration
@@ -27,7 +29,9 @@ import configuration.dsl.AdapterDTsConfigurationDsl
 import configuration.dsl.DslLoaderImpl
 import infrastructure.component.JenaDtkgEngine
 import infrastructure.component.WoTDtdManager
+import infrastructure.component.api.platformManagementInterfaceApi
 import infrastructure.component.api.wodtDigitalTwinInterfaceApi
+import infrastructure.testdouble.AdapterHttpClientTestDouble
 import infrastructure.testdouble.AzureDTClientTestDouble
 import infrastructure.testdouble.PlatformManagementInterfaceTestDouble
 import io.ktor.serialization.kotlinx.json.json
@@ -72,6 +76,7 @@ object TestingUtils {
             adapterDirectory: AdapterDirectory,
             dtkgEngine: DtkgEngine,
             dtdManager: DtdManager,
+            platformManagementInterface: PlatformManagementInterface,
         ) -> Unit,
     ) {
         val configuration = checkNotNull(loadConfiguration("simpleConfiguration.kts"))
@@ -82,6 +87,7 @@ object TestingUtils {
             AzureDTClientTestDouble(),
             PlatformManagementInterfaceTestDouble(),
         )
+        val platformManagementInterface = PlatformManagementInterfaceImpl(AdapterHttpClientTestDouble())
 
         testApplication {
             install(WebSockets)
@@ -90,8 +96,9 @@ object TestingUtils {
             }
             application {
                 wodtDigitalTwinInterfaceApi(adapterDirectory, dtkgEngine, dtdManager)
+                platformManagementInterfaceApi(platformManagementInterface)
             }
-            tests(adapterDirectory, dtkgEngine, dtdManager)
+            tests(adapterDirectory, dtkgEngine, dtdManager, platformManagementInterface)
         }
     }
 }

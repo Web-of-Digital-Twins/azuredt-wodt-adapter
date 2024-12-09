@@ -47,7 +47,7 @@ class WoDTDigitalTwinInterfaceApiTest : StringSpec({
     )
 
     "an HTTP GET request on a DT URI should return 303 and link to the DTKG" {
-        testApi { adapterDirectory, _, _ ->
+        testApi { adapterDirectory, _, _, _ ->
             adapterDirectory.addDT(azureId, dtUri)
             val clientNoRedirect = createClient {
                 followRedirects = false
@@ -59,21 +59,21 @@ class WoDTDigitalTwinInterfaceApiTest : StringSpec({
     }
 
     "an HTTP GET request on a not exposed DT URI should return 404" {
-        testApi { _, _, _ ->
+        testApi { _, _, _, _ ->
             val response = client.get("/lampDT")
             response shouldHaveStatus HttpStatusCode.NotFound
         }
     }
 
     "an HTTP GET request on a not existent DTKG should return 404" {
-        testApi { _, _, _ ->
+        testApi { _, _, _, _ ->
             val response = client.get("/lampDT/dtkg")
             response shouldHaveStatus HttpStatusCode.NotFound
         }
     }
 
     "an HTTP GET request on an existent DTKG should return the DTKG" {
-        testApi { directory, dtkgEngine, _ ->
+        testApi { directory, dtkgEngine, _, _ ->
             directory.addDT(azureId, dtUri)
             dtkgEngine.updateSingleDT(azureId, dtKnowledgeGraph)
             val response = client.get("/lampDT/dtkg")
@@ -85,14 +85,14 @@ class WoDTDigitalTwinInterfaceApiTest : StringSpec({
     }
 
     "an HTTP GET request on a not existent DTD should return 404" {
-        testApi { _, _, _ ->
+        testApi { _, _, _, _ ->
             val response = client.get("/lampDT/dtd")
             response shouldHaveStatus HttpStatusCode.NotFound
         }
     }
 
     "an HTTP GET request on an existent DTD should return the DTD" {
-        testApi { directory, _, dtdManager ->
+        testApi { directory, _, dtdManager, _ ->
             directory.addDT(azureId, dtUri)
             val response = client.get("/lampDT/dtd")
             response shouldHaveStatus HttpStatusCode.OK
