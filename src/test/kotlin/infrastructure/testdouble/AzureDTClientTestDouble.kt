@@ -33,28 +33,28 @@ import java.time.LocalDateTime
 /** A simple [AzureDTClient] test double. */
 class AzureDTClientTestDouble : AzureDTClient {
     override val dtUpdates: Flow<SignalRDigitalTwinUpdate> = flow {
-        emit(
-            SignalRDigitalTwinUpdate(
-                dtId = "lampDT",
-                eventType = SignalRDigitalTwinEventType.UPDATE,
-                eventDateTime = LocalDateTime.now().toString(),
-                properties = mapOf("luminosity" to JsonPrimitive(100)),
-                relationships = listOf(
-                    SignalRDigitalTwinRelationship(
-                        sourceId = "lampDT",
-                        relationshipName = "isInRoom",
-                        targetId = "http://external-dt.com",
-                        external = true,
-                    ),
-                    SignalRDigitalTwinRelationship(
-                        sourceId = "lampDT",
-                        relationshipName = "isInRoom",
-                        targetId = "internal-room",
-                        external = false,
-                    ),
+        val event = SignalRDigitalTwinUpdate(
+            dtId = "lampDT",
+            eventType = SignalRDigitalTwinEventType.UPDATE,
+            eventDateTime = LocalDateTime.now().toString(),
+            properties = mapOf("luminosity" to JsonPrimitive(100)),
+            relationships = listOf(
+                SignalRDigitalTwinRelationship(
+                    sourceId = "lampDT",
+                    relationshipName = "isInRoom",
+                    targetId = "http://external-dt.com",
+                    external = true,
+                ),
+                SignalRDigitalTwinRelationship(
+                    sourceId = "lampDT",
+                    relationshipName = "isInRoom",
+                    targetId = "internal-room",
+                    external = false,
                 ),
             ),
         )
+        emit(event.copy(dtId = "not-existent"))
+        emit(event)
     }
 
     override fun getDTCurrentState(azureId: String): AzureDigitalTwinState? =
