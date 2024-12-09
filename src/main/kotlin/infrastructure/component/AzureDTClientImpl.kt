@@ -16,36 +16,55 @@
 
 package infrastructure.component
 
+import application.component.AzureDTClient
 import application.presenter.adt.AzureDigitalTwinRelationship
 import application.presenter.adt.AzureDigitalTwinState
+import application.presenter.adt.SignalRDigitalTwinUpdate
 import com.azure.digitaltwins.core.BasicDigitalTwin
 import com.azure.digitaltwins.core.BasicRelationship
 import com.azure.digitaltwins.core.DigitalTwinsClient
 import com.azure.digitaltwins.core.DigitalTwinsClientBuilder
 import com.azure.digitaltwins.core.implementation.models.ErrorResponseException
 import com.azure.identity.DefaultAzureCredentialBuilder
+import com.microsoft.signalr.HubConnection
+import com.microsoft.signalr.HubConnectionBuilder
+import com.microsoft.signalr.HubConnectionState
 import configuration.AdapterConfiguration
 import io.github.oshai.kotlinlogging.KotlinLogging
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.jsonPrimitive
+import kotlin.coroutines.CoroutineContext
 import com.azure.json.models.JsonObject as AzureJsonObject
 
-/** This interface models the client to perform operations on Azure Digital Twins. */
-interface AzureDTClient {
-    /** Get the current state of the Digital Twin with the provided [azureId]. */
-    fun getDTCurrentState(azureId: String): AzureDigitalTwinState?
-
-    /** Get the DTDL model of the Digital Twin in ADT with the provided [azureId]. */
-    fun getDTModel(azureId: String): JsonObject?
-}
-
 /** Implementation of [AzureDTClient]. It takes the adapter [configuration]. */
-class AzureDTClientImpl(configuration: AdapterConfiguration) : AzureDTClient {
+class AzureDTClientImpl(
+    configuration: AdapterConfiguration,
+    private val context: CoroutineContext = Dispatchers.Default,
+) : AzureDTClient {
     private val azureClient = DigitalTwinsClientBuilder()
         .credential(DefaultAzureCredentialBuilder().build())
         .endpoint(configuration.azureDTEndpoint.toString())
         .buildClient()
+    private val _dtUpdates = MutableSharedFlow<SignalRDigitalTwinUpdate>()
+
+    override val dtUpdates: Flow<SignalRDigitalTwinUpdate> = _dtUpdates.asSharedFlow()
+
+    init {
+        val signalRClient = HubConnectionBuilder.create(configuration.signalrNegotiationUrl.toString()).build()
+        signalRClient.on(configuration.signalrTopicName, {
+            CoroutineScope(context).launch {
+                _dtUpdates.emit(Json.decodeFromString<SignalRDigitalTwinUpdate>(it))
+            }
+        }, String::class.java)
+        signalRClient.persistentStart()
+    }
 
     override fun getDTCurrentState(azureId: String): AzureDigitalTwinState? {
         val properties = azureClient.applySafeDigitalTwinOperation {
@@ -93,6 +112,16 @@ class AzureDTClientImpl(configuration: AdapterConfiguration) : AzureDTClient {
             logger.error { exception }
             null
         }
+
+    private fun HubConnection.persistentStart() {
+        this.start().blockingAwait()
+        logger.info { "Started" }
+        this.onClosed {
+            if (this.connectionState == HubConnectionState.DISCONNECTED) {
+                this.persistentStart()
+            }
+        }
+    }
 
     /** Companion object of the [AzureDTClient] class. */
     companion object {

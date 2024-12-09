@@ -16,16 +16,47 @@
 
 package infrastructure.testdouble
 
+import application.component.AzureDTClient
 import application.presenter.adt.AzureDigitalTwinRelationship
 import application.presenter.adt.AzureDigitalTwinState
-import infrastructure.component.AzureDTClient
+import application.presenter.adt.SignalRDigitalTwinEventType
+import application.presenter.adt.SignalRDigitalTwinRelationship
+import application.presenter.adt.SignalRDigitalTwinUpdate
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 import utils.TestingUtils.readResourceFile
+import java.time.LocalDateTime
 
 /** A simple [AzureDTClient] test double. */
 class AzureDTClientTestDouble : AzureDTClient {
+    override val dtUpdates: Flow<SignalRDigitalTwinUpdate> = flow {
+        emit(
+            SignalRDigitalTwinUpdate(
+                dtId = "lampDT",
+                eventType = SignalRDigitalTwinEventType.UPDATE,
+                eventDateTime = LocalDateTime.now().toString(),
+                properties = mapOf("luminosity" to JsonPrimitive(100)),
+                relationships = listOf(
+                    SignalRDigitalTwinRelationship(
+                        sourceId = "lampDT",
+                        relationshipName = "isInRoom",
+                        targetId = "http://external-dt.com",
+                        external = true,
+                    ),
+                    SignalRDigitalTwinRelationship(
+                        sourceId = "lampDT",
+                        relationshipName = "isInRoom",
+                        targetId = "internal-room",
+                        external = false,
+                    ),
+                ),
+            ),
+        )
+    }
+
     override fun getDTCurrentState(azureId: String): AzureDigitalTwinState? =
         if (azureId == "lampDT") {
             AzureDigitalTwinState(

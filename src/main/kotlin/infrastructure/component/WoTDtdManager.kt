@@ -16,6 +16,7 @@
 
 package infrastructure.component
 
+import application.component.AzureDTClient
 import application.component.DtdManager
 import application.component.PlatformManagementInterfaceReader
 import application.presenter.adt.DtdlPresentation.toWoTThingDescription

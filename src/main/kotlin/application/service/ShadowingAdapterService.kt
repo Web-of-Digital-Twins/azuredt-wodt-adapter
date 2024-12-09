@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package infrastructure.component
+package application.service
 
+import application.component.AzureDTClient
 import application.component.ShadowingAdapter
 import application.presenter.adt.AzureDigitalTwinRelationship
 import application.presenter.adt.AzureDigitalTwinState
@@ -24,17 +25,13 @@ import application.presenter.adt.SignalRDigitalTwinRelationship
 import application.presenter.adt.SignalRDigitalTwinUpdate
 import application.presenter.adt.extractDTKnowledgeGraph
 import application.presenter.adt.toShadowingEvent
-import com.microsoft.signalr.HubConnection
-import com.microsoft.signalr.HubConnectionBuilder
-import com.microsoft.signalr.HubConnectionState
 import configuration.Configuration
-import io.github.oshai.kotlinlogging.KotlinLogging
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
-import kotlinx.serialization.json.Json
 import model.dt.DTUri
 import model.event.CreateEvent
 import model.event.ShadowingEvent
@@ -42,36 +39,32 @@ import java.time.LocalDateTime
 import kotlin.coroutines.CoroutineContext
 
 /**
- * This class implements a SignalR-based [ShadowingAdapter]. It is configured via its [configuration]
+ * This class implements the [application.component.ShadowingAdapter] component.
+ * It is configured via its [configuration].
  * DT updates are mapped in DT snapshots by an Azure Function that are sent via SignalR to consumers.
- * An [azureDTClient] is necessary to initialize the shadowing.
+ * An [azureDTClient] is necessary to decouple from infrastructure apis.
  */
-class SignalRShadowingAdapter(
+class ShadowingAdapterService(
     private val configuration: Configuration,
     private val azureDTClient: AzureDTClient,
     private val context: CoroutineContext = Dispatchers.IO,
 ) : ShadowingAdapter {
     private val _events = MutableSharedFlow<ShadowingEvent>()
-    private val signalRClient = HubConnectionBuilder.create(configuration.signalrNegotiationUrl.toString()).build()
 
     override val events = _events.asSharedFlow()
 
-    override suspend fun start() {
-        CoroutineScope(context).launch { shadowExistingDts() }
-        signalRClient.on(configuration.signalrTopicName, {
-            Json.decodeFromString<SignalRDigitalTwinUpdate>(it)
-                .filterEvent()
+    override suspend fun start() = coroutineScope {
+        launch(context) { shadowExistingDts() }
+        azureDTClient.dtUpdates.collect {
+            it.filterEvent()
                 ?.also { event ->
                     val dtId = DTUri.fromAzureID(event.dtId, configuration)
                     val dtSemantics = configuration.digitalTwinConfigurations[event.dtId]?.semantics
                     if (dtId != null && dtSemantics != null) {
-                        CoroutineScope(context).launch {
-                            _events.emit(event.toShadowingEvent(dtId, dtSemantics))
-                        }
+                        _events.emit(event.toShadowingEvent(dtId, dtSemantics))
                     }
                 }
-        }, String::class.java)
-        signalRClient.persistentStart()
+        }
     }
 
     private fun shadowExistingDts() {
@@ -131,19 +124,4 @@ class SignalRShadowingAdapter(
                         },
                 )
             }
-
-    private fun HubConnection.persistentStart() {
-        this.start().blockingAwait()
-        logger.info { "Started" }
-        this.onClosed {
-            if (this.connectionState == HubConnectionState.DISCONNECTED) {
-                this.persistentStart()
-            }
-        }
-    }
-
-    /** Companion object for [SignalRShadowingAdapter]. */
-    companion object {
-        private val logger = KotlinLogging.logger {}
-    }
 }

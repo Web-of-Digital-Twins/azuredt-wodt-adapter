@@ -17,13 +17,13 @@
 import application.service.AdapterDirectoryService
 import application.service.Engine
 import application.service.PlatformManagementInterfaceImpl
+import application.service.ShadowingAdapterService
 import configuration.ConfigurationLoader
 import configuration.dsl.DslLoaderImpl
 import infrastructure.component.AdapterHttpClientImpl
 import infrastructure.component.AdapterWebServer
 import infrastructure.component.AzureDTClientImpl
 import infrastructure.component.JenaDtkgEngine
-import infrastructure.component.SignalRShadowingAdapter
 import infrastructure.component.WoTDtdManager
 import kotlinx.coroutines.runBlocking
 
@@ -35,7 +35,7 @@ fun main(): Unit = runBlocking {
     val httpClient = AdapterHttpClientImpl()
     val azureDTClient = AzureDTClientImpl(configuration)
     val adapterDirectory = AdapterDirectoryService(configuration)
-    val shadowingAdapter = SignalRShadowingAdapter(configuration, azureDTClient)
+    val shadowingAdapter = ShadowingAdapterService(configuration, azureDTClient)
     val platformManagementInterface = PlatformManagementInterfaceImpl(httpClient)
     val dtdManager = WoTDtdManager(configuration, azureDTClient, platformManagementInterface)
     val dtkgEngine = JenaDtkgEngine(configuration)
