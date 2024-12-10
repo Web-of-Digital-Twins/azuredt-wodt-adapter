@@ -23,12 +23,16 @@ object URIUtil {
     /** Similar method to [URI.resolve] but that always attach the path to the end. */
     fun URI.relativeResolve(path: String): URI {
         var baseUri = this
-        if (!baseUri.toString().endsWith("/") && !path.startsWith("#")) {
+        var relativePath = path
+        if (relativePath.startsWith("/")) {
+            relativePath = relativePath.takeLast(relativePath.length - 1)
+        }
+        if (!baseUri.toString().endsWith("/") && !relativePath.startsWith("#")) {
             if (baseUri.toString().endsWith("#")) {
                 baseUri = URI.create(baseUri.toString().substring(0, baseUri.toString().length - 1))
             }
             baseUri = URI.create("$baseUri/")
         }
-        return baseUri.resolve(path)
+        return baseUri.resolve(relativePath)
     }
 }
