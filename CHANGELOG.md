@@ -1,3 +1,54 @@
+## [1.0.2](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/compare/1.0.1...1.0.2) (2024-12-10)
+
+### Dependency updates
+
+* **deps:** add archunit dependency ([e196c91](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/e196c9175be3d6fee77e2f5a09b335fdfcb4d0cd))
+* **deps:** add client content negotiation plugin for tests ([ba17c47](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/ba17c477b9582332a4dec98bf8ae9eb30857d7b4))
+* **deps:** update alpine docker tag to v3.21 ([88e0263](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/88e0263cf0a2bd2ae9eab04e0af2731e59b7da2a))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.116 ([e3dbbc4](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/e3dbbc4d2ee2dcba0ffd85dca99cbbf52b157d1f))
+* **deps:** update ktor monorepo to v3.0.2 ([e560660](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/e560660f24ecaa92bbb02d90c3d804c71ead804c))
+* **deps:** update node.js to 22.12 ([d1ada63](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/d1ada6384282655d3d28d56a73ad0fd96d224a80))
+
+### Bug Fixes
+
+* correct relative resolve functionality to ensure that users always have the expected behavior ([1c5844d](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/1c5844df72f2277d413e8e591d8073296dc33c92))
+
+### Tests
+
+* add adapter http client test double ([8ad43b4](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/8ad43b488f320d4a2237473cb341e58d65e08043))
+* add dtkg engine tests ([66f7cb8](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/66f7cb82304fa77c82bfba2dc49e1e55cb4cc778))
+* add event to exclude ([b04e8f2](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/b04e8f2a3844cc2e82585c2f565c65a4bbdb44f6))
+* add ktor testing utils ([dc7482b](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/dc7482bb5c76c18a0a3987c83f245fa4ab30b505))
+* add platform management interface service tests ([fcb5cff](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/fcb5cffaab48e39069fe3db8b9f72d739060711e))
+* add shadowing adapter event filtering test ([9efdfaa](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/9efdfaa0244a9c7cc0a30fc5f198c0425077e8fb))
+* add test to ensure that relative resolve should work even when original resolve do not consider relative uri ([0a2bcb5](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/0a2bcb5bce444a4a0a95d49c36b32128d53ed2fa))
+* add tests for dt uri factory ([3e1d88a](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/3e1d88a366d4fce3b3f34b906be2744a975d59a2))
+* add tests for dtdl and td presentation ([61ec497](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/61ec4973f1a4b60812ae84abf8eebbcc992f744f))
+* add tests for platform management interface api ([b5240cc](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/b5240cc861c0c4d4bd984705157112a9d923feaf))
+* add tests for wodt digital twin interface api ([a4004ac](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/a4004ac2ca7b907c9d87d628b2de6125b1b08986))
+* add tests for wot dtd manager ([0fca266](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/0fca26644d46e0afa9938daef500df9b18f89dd9))
+* **architecture:** add architectural tests to respect clean architecture ([813b645](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/813b64596145f6ed00ed11159845be135409a94e))
+* include platform management interface api and service in testing utils ([35be019](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/35be019346c5f35f332a73d7fc96fdecc2e3d045))
+
+### Build and continuous integration
+
+* **deps:** update codecov/codecov-action action to v5.1.1 ([3a530b7](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/3a530b7562584130050fa210ffcb886ce82e3fe6))
+* update project name ([f528b0d](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/f528b0da09693c3bc3f37856b9eb0b2a9c26d651))
+
+### General maintenance
+
+* add ExternalDT dtdl model ([05fe7c5](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/05fe7c56bb888e24bfb6c4d984e50606b8674f00))
+* add required pipeline image ([9fe716e](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/9fe716e80b84e3173dca5765c09705d1db171cb0))
+* update README ([f94df41](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/f94df418d42e83d9314712134bb91271fe177504))
+
+### Style improvements
+
+* **test:** adhere to kotlin style guide ([a6f6a56](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/a6f6a566bbc2ef16c5b6b5e356359a5e83408b6f))
+
+### Refactoring
+
+* extract infrastructure responsibilities to create an api independent shadowing adapter ([2846fa7](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/2846fa7706c477743ce47f9642e34299d1fcbf57))
+
 ## [1.0.1](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/compare/1.0.0...1.0.1) (2024-12-02)
 
 ### Dependency updates
