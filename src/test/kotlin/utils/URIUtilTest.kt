@@ -45,4 +45,12 @@ class URIUtilTest : StringSpec({
         URI.create("http://example.com/a/b/c").relativeResolve("d/e/f#dtkg") shouldBe
             URI.create("http://example.com/a/b/c/d/e/f#dtkg")
     }
+
+    "It should be possible to append at the end even when the relative path starts with /" {
+        URI.create("http://example.com").relativeResolve("/dtkg") shouldBe URI.create("http://example.com/dtkg")
+        URI.create("http://example.com/a/b/c").relativeResolve("/dtkg") shouldBe
+            URI.create("http://example.com/a/b/c/dtkg")
+        URI.create("http://example.com/a/b/c").relativeResolve("/path/to/dtkg") shouldBe
+            URI.create("http://example.com/a/b/c/path/to/dtkg")
+    }
 })
