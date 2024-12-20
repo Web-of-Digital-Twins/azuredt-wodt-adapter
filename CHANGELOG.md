@@ -1,3 +1,18 @@
+## [1.0.3](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/compare/1.0.2...1.0.3) (2024-12-20)
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlinx:kotlinx-coroutines-core to v1.10.0 ([fb81d90](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/fb81d9064d7397d3cd1c15a9bb967bb805115c87))
+* **deps:** update ktor monorepo to v3.0.3 ([564e01c](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/564e01c917b403c04c380b2db71f5edca8d2ad88))
+* **deps:** update plugin com.gradle.develocity to v3.19 ([0c12bae](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/0c12baea358ce74a2f0868770f3facb386397472))
+* **deps:** update plugin dokka to v2 ([9e08b35](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/9e08b35efddd14e8fad58ac4959255b1d41aa077))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.16 ([53601db](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/53601dbaf9f5640d4c567dd569eed8061b550440))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.17 ([c30fd14](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/c30fd1424b1e79b85252cda367819e57d842a073))
+
+### Build and continuous integration
+
+* **deps:** update codecov/codecov-action action to v5.1.2 ([d1e9877](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/d1e9877cd55f0951f825575a02683a307a23fa5b))
+
 ## [1.0.2](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/compare/1.0.1...1.0.2) (2024-12-10)
 
 ### Dependency updates
