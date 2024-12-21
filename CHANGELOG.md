@@ -1,3 +1,9 @@
+## [1.0.4](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/compare/1.0.3...1.0.4) (2024-12-21)
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlinx:kotlinx-coroutines-core to v1.10.1 ([2a229a1](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/2a229a1eec5cf6ccaf3e44fcb6c76a756a11051d))
+
 ## [1.0.3](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/compare/1.0.2...1.0.3) (2024-12-20)
 
 ### Dependency updates
