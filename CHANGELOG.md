@@ -1,3 +1,13 @@
+## [1.0.5](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/compare/1.0.4...1.0.5) (2025-01-07)
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlinx:kotlinx-serialization-json to v1.8.0 ([317349a](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/317349a40d36eb402b0d28e761c28001b946006a))
+* **deps:** update dependency org.eclipse.ditto:ditto-wot-model to v3.6.4 ([3ae815f](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/3ae815f2260b771ce8d06326c34a6ae4a8d26945))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.117 ([bb8b7f6](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/bb8b7f6c54eb0493c8cd14e0ecc9a05757e088c9))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.118 ([d31af30](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/d31af30a91f637b935ff09019207122b18a96727))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.18 ([37244f2](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/37244f2bf57407355ccc01b262c2882bdcafea09))
+
 ## [1.0.4](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/compare/1.0.3...1.0.4) (2024-12-21)
 
 ### Dependency updates
