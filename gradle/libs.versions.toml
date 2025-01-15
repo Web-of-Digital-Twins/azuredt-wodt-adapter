@@ -7,7 +7,7 @@ ktor = "3.0.3"
 archunit = { module = "com.tngtech.archunit:archunit-junit5", version = "1.3.0" }
 azure-digital-twins = { module = "com.azure:azure-digitaltwins-core", version = "1.4.0" }
 azure-identity = { module = "com.azure:azure-identity", version = "1.15.0" }
-azure-signalr = { module = "com.microsoft.signalr:signalr", version = "8.0.11" }
+azure-signalr = { module = "com.microsoft.signalr:signalr", version = "9.0.1" }
 ditto-wot-model = { module = "org.eclipse.ditto:ditto-wot-model", version = "3.6.7" }
 jena = { module = "org.apache.jena:apache-jena-libs", version = "5.2.0" }
 kotest-junit5 = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
