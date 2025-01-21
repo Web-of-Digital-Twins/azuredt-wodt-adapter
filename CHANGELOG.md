@@ -1,3 +1,19 @@
+## [1.0.6](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/compare/1.0.5...1.0.6) (2025-01-21)
+
+### Dependency updates
+
+* **deps:** update dependency com.azure:azure-identity to v1.15.0 ([a45ff03](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/a45ff032f4bd380ea6d0abc637a5334100bcd5b4))
+* **deps:** update dependency com.microsoft.signalr:signalr to v9 ([c03846a](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/c03846a693a886d189bbeac757b7d36e2781955c))
+* **deps:** update dependency org.eclipse.ditto:ditto-wot-model to v3.6.5 ([5080aa4](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/5080aa4d8806efffae2fc76fbd61e021abd5ec88))
+* **deps:** update dependency org.eclipse.ditto:ditto-wot-model to v3.6.6 ([092274c](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/092274c55ac4768e892789294c20d04f4a2b1ef7))
+* **deps:** update dependency org.eclipse.ditto:ditto-wot-model to v3.6.7 ([8bb133a](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/8bb133a663eeae65e2d9aeaa2718a863cd643524))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.119 ([4c1203e](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/4c1203ec64d6da7cdb5d45c1749d71ac84b39caf))
+* **deps:** update node.js to 22.13 ([88d2c2e](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/88d2c2e58adda3765901d89b8dec8998aa75c02b))
+
+### Documentation
+
+* add platform management interface api to swagger doc ([c97205a](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/c97205a36f83b3f2741d77f10f2b7bd07583b616))
+
 ## [1.0.5](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/compare/1.0.4...1.0.5) (2025-01-07)
 
 ### Dependency updates
