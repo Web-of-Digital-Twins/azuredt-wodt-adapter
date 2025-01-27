@@ -1,3 +1,17 @@
+## [1.0.7](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/compare/1.0.6...1.0.7) (2025-01-27)
+
+### Dependency updates
+
+* **core-deps:** update kotlin monorepo to v2.1.10 ([ceb83c6](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/ceb83c63b668510a2b3b28f6b89788b88384a90a))
+* **deps:** update dependency org.apache.jena:apache-jena-libs to v5.3.0 ([4e1ae51](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/4e1ae517f1e2c0a8eadfa47a24094c0a798375d6))
+* **deps:** update dependency org.eclipse.ditto:ditto-wot-model to v3.6.9 ([6b480e3](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/6b480e3efe1683262b99550c0f40ec793352d218))
+
+### Build and continuous integration
+
+* **deps:** update actions/setup-node action to v4.2.0 ([17916c8](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/17916c839ac365f7b8286f3726df88b62b658cdd))
+* **deps:** update codecov/codecov-action action to v5.2.0 ([7aee222](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/7aee222f4e5bba7066bd692cdf76f0052a5925f5))
+* **deps:** update codecov/codecov-action action to v5.3.1 ([b62d1bd](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/b62d1bdf298bf930a8804cb7f829ae2b897f67d0))
+
 ## [1.0.6](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/compare/1.0.5...1.0.6) (2025-01-21)
 
 ### Dependency updates
