@@ -1,3 +1,12 @@
+## [1.0.9](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/compare/1.0.8...1.0.9) (2025-04-01)
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlinx:kotlinx-serialization-json to v1.8.1 ([646e72c](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/646e72c4160c5423af7e5d0f0dea6f251b988581))
+* **deps:** update dependency io.github.oshai:kotlin-logging-jvm to v7.0.6 ([af3c63f](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/af3c63f8d72fd4c28fa2f1041e00bb53dd28436c))
+* **deps:** update dependency org.eclipse.ditto:ditto-wot-model to v3.7.2 ([40e5387](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/40e5387b9ec45a58746fd3c535d1194ff535d477))
+* **deps:** update ktor monorepo to v3.1.2 ([f0ec6ff](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/f0ec6ff843fdf5441cc3a3b2c4fd210136c6bc5e))
+
 ## [1.0.8](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/compare/1.0.7...1.0.8) (2025-03-26)
 
 ### Dependency updates
