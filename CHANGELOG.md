@@ -1,3 +1,11 @@
+## [1.0.10](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/compare/1.0.9...1.0.10) (2025-04-09)
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlinx:kotlinx-coroutines-core to v1.10.2 ([718aa5f](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/718aa5ffc778dbfab9bc53cb67347316a179c2af))
+* **deps:** update plugin com.gradle.develocity to v4 ([0237f5a](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/0237f5ab935813c956450beb232c70059f943a7a))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.22 ([d7df3f7](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/d7df3f77054554b1fcf0bb64a16816c576325f47))
+
 ## [1.0.9](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/compare/1.0.8...1.0.9) (2025-04-01)
 
 ### Dependency updates
