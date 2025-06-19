@@ -5,7 +5,7 @@ ktor = "3.2.0"
 
 [libraries]
 archunit = { module = "com.tngtech.archunit:archunit-junit5", version = "1.4.1" }
-azure-digital-twins = { module = "com.azure:azure-digitaltwins-core", version = "1.4.2" }
+azure-digital-twins = { module = "com.azure:azure-digitaltwins-core", version = "1.5.0" }
 azure-identity = { module = "com.azure:azure-identity", version = "1.16.2" }
 azure-signalr = { module = "com.microsoft.signalr:signalr", version = "9.0.3" }
 ditto-wot-model = { module = "org.eclipse.ditto:ditto-wot-model", version = "3.7.6" }
