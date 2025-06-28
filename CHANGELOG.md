@@ -1,3 +1,9 @@
+## [1.0.13](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/compare/1.0.12...1.0.13) (2025-06-28)
+
+### Dependency updates
+
+* **core-deps:** update kotlin monorepo to v2.2.0 ([d705825](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/d7058256f8d5ab438f77934d9bd3b50fddf95933))
+
 ## [1.0.12](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/compare/1.0.11...1.0.12) (2025-06-28)
 
 ### Dependency updates
