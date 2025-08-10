@@ -6,7 +6,7 @@ ktor = "3.2.3"
 [libraries]
 archunit = { module = "com.tngtech.archunit:archunit-junit5", version = "1.4.1" }
 azure-digital-twins = { module = "com.azure:azure-digitaltwins-core", version = "1.5.1" }
-azure-identity = { module = "com.azure:azure-identity", version = "1.16.3" }
+azure-identity = { module = "com.azure:azure-identity", version = "1.17.0" }
 azure-signalr = { module = "com.microsoft.signalr:signalr", version = "9.0.3" }
 ditto-wot-model = { module = "org.eclipse.ditto:ditto-wot-model", version = "3.7.6" }
 jena = { module = "org.apache.jena:apache-jena-libs", version = "5.5.0" }
