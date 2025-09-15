@@ -1,3 +1,30 @@
+## [1.0.15](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/compare/1.0.14...1.0.15) (2025-09-15)
+
+### Dependency updates
+
+* **core-deps:** update kotlin monorepo to v2.2.20 ([a5bb115](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/a5bb1159d35a257028383b1ab07c8149251fb64b))
+* **deps:** update dependency com.azure:azure-digitaltwins-core to v1.5.2 ([7318220](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/73182200bdf37b077d636c50f38cd834cab2ac06))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.140 ([587dd16](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/587dd1693950d908e791685b92a303b40ea8a0a6))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.141 ([d370589](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/d37058927c598b5fa29621675b1b961b0df7831d))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.143 ([7b7a940](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/7b7a9402e18283627e71536f796851221f36d9ba))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.144 ([214b808](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/214b808eb3fdfd8e46c63339b36498e0fdb4a396))
+* **deps:** update kotest to v6 ([8750854](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/8750854cba091392eab8993f9c699899a3c7084d))
+* **deps:** update kotest to v6.0.1 ([c1ddebf](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/c1ddebf51374f1750af3a6fcd4ec87ddcc43115f))
+* **deps:** update kotest to v6.0.2 ([d1e0496](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/d1e0496f89b9514a8a8927472acec2cb85d3cc12))
+* **deps:** update kotest to v6.0.3 ([62ee2e0](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/62ee2e07869862b376bff7d38281542bb2d0360d))
+* **deps:** update plugin com.gradle.develocity to v4.1.1 ([04429f8](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/04429f8b69bff73d72770a7eec47e0390cf6bea5))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.29 ([8c39ed1](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/8c39ed1398f9e4cc1453eefda8acdd54abe2c84d))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.30 ([ce7064e](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/ce7064eccac183e7f4ed0986400b822bbbc80ff5))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.0 ([ea26d90](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/ea26d903b277f8edbb3c195d3c87c0ca47be54ce))
+
+### Build and continuous integration
+
+* **deps:** update actions/checkout action to v5 ([bd32f06](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/bd32f0628259dc6b140435fe3799f3ac55cf06aa))
+* **deps:** update actions/setup-java action to v5 ([7bd7544](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/7bd754454bc523f3208acb2c1e74dda588df57a1))
+* **deps:** update actions/setup-node action to v5 ([91849fe](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/91849fe4dbabf855b23403c7b9fd98bff9444c33))
+* **deps:** update codecov/codecov-action action to v5.5.0 ([c1743b9](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/c1743b90e2c2a16667360be9b66fffb6f512afee))
+* **deps:** update codecov/codecov-action action to v5.5.1 ([0d975de](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/0d975ded168978bdcea4595329033c95f0f4ce4b))
+
 ## [1.0.14](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/compare/1.0.13...1.0.14) (2025-08-14)
 
 ### Dependency updates
