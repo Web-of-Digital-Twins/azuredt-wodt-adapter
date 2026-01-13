@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Validate the Gradle Wrapper
         uses: gradle/wrapper-validation-action@v3.5.0
 
@@ -30,7 +30,7 @@ jobs:
     runs-on: ${{ matrix.os }}-latest
     steps:
       - name: Checkout the repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           submodules: recursive
           fetch-depth: 0
@@ -43,7 +43,7 @@ jobs:
         run: ./gradlew clean check
       - name: CodeCov
         if: ${{ contains('Linux', runner.os) }}
-        uses: codecov/codecov-action@v5.5.1
+        uses: codecov/codecov-action@v5.5.2
         with:
           directory: "build/reports/jacoco"
 
@@ -70,7 +70,7 @@ jobs:
       )
     steps:
       - name: Checkout the repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           submodules: recursive
           fetch-depth: 0
@@ -103,7 +103,7 @@ jobs:
     if: needs.release-and-delivery.outputs.release-status == 'released'
     steps:
       - name: Checkout the repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           submodules: recursive
           fetch-depth: 0
