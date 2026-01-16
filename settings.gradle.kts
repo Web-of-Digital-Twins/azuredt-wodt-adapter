@@ -16,7 +16,7 @@
 
 plugins {
     id("org.danilopianini.gradle-pre-commit-git-hooks") version "2.1.2"
-    id("com.gradle.develocity") version "4.3"
+    id("com.gradle.develocity") version "4.3.1"
 }
 
 rootProject.name = "azuredt-wodt-adapter"
