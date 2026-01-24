@@ -1,3 +1,20 @@
+## [1.0.18](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/compare/1.0.17...1.0.18) (2026-01-24)
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlinx:kotlinx-serialization-json to v1.10.0 ([e291465](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/e291465c422a77453a81372b372014c3839c2333))
+* **deps:** update dependency com.azure:azure-identity to v1.18.2 ([7263a72](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/7263a720f45aaf89ed2a4639419d9781485e3c73))
+* **deps:** update gradle to v9.3.0 ([3821c35](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/3821c35d8025a30d4bbbcaa8c5c1f78a11d5acdf))
+* **deps:** update kotest to v6.1.0 ([df1faaa](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/df1faaa13c4bc55df47cd726d255b2cd3766916d))
+* **deps:** update kotest to v6.1.1 ([20e4aab](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/20e4aab48c6b05b93dcda7c722704b880433b019))
+* **deps:** update plugin com.gradle.develocity to v4.3.1 ([7d8dcb7](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/7d8dcb77ac466737e7703da3258636fa0c02bff2))
+
+### Build and continuous integration
+
+* **deps:** update actions/setup-node action to v6 ([53fb836](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/53fb836d6ecf5d127cf30f961bf693b0bb598e70))
+* **deps:** update actions/setup-node action to v6.1.0 ([3692fa2](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/3692fa2508c8a2aa7cef1ea8fec3024de3ce36f1))
+* **deps:** update actions/setup-node action to v6.2.0 ([df0ed7a](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/df0ed7a488df608922d79cedc07daa0d6721e148))
+
 ## [1.0.17](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/compare/1.0.16...1.0.17) (2026-01-13)
 
 ### Dependency updates
