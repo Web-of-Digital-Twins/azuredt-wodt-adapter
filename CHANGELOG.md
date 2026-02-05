@@ -1,3 +1,13 @@
+## [1.0.19](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/compare/1.0.18...1.0.19) (2026-02-05)
+
+### Dependency updates
+
+* **core-deps:** update kotlin monorepo to v2.3.10 ([f743c61](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/f743c61f160268e32310f42b7eca30926dbd7521))
+* **deps:** update dependency org.eclipse.ditto:ditto-wot-model to v3.8.11 ([0c53e2a](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/0c53e2a98d2c158f53254753d789be1769344eeb))
+* **deps:** update kotest to v6.1.2 ([5f2a3e8](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/5f2a3e815f64cf5e5682a0236975c7072704c2bc))
+* **deps:** update ktor monorepo to v3.4.0 ([8886541](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/88865414fe080263b330091e9c4be9d2b6ebf89b))
+* **deps:** update plugin com.gradle.develocity to v4.3.2 ([b79c4f7](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/b79c4f77ba2ec4f4e6d2e8af9f79d8c612ae3387))
+
 ## [1.0.18](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/compare/1.0.17...1.0.18) (2026-01-24)
 
 ### Dependency updates
