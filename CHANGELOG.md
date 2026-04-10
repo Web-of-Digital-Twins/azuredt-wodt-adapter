@@ -1,3 +1,32 @@
+## [1.0.20](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/compare/1.0.19...1.0.20) (2026-04-10)
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlinx:kotlinx-serialization-json to v1.11.0 ([bd09dc6](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/bd09dc671ba9ff5df32bb37843403fb3ee14040c))
+* **deps:** update dependency com.azure:azure-digitaltwins-core to v1.5.5 ([f605aae](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/f605aaed015eed35b646ad26496438cd0d0db5e2))
+* **deps:** update dependency io.github.oshai:kotlin-logging-jvm to v8 ([2dcf435](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/2dcf43548c2b771f6c8b05a65072142b4d893851))
+* **deps:** update dependency org.eclipse.ditto:ditto-wot-model to v3.8.12 ([db4b71b](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/db4b71b9753f9a26f947a4a942778a7a208e890a))
+* **deps:** update gradle to v9.3.1 ([77f9b79](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/77f9b794c53d3f05771669c3d0d007feba15bf24))
+* **deps:** update gradle to v9.4.0 ([83a5077](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/83a5077cb8abc10eb5723f520da1539bd3aadb2a))
+* **deps:** update gradle to v9.4.1 ([5692879](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/56928793286e88afacc8e0f3b1da0bdce2c9c811))
+* **deps:** update kotest to v6.1.10 ([ebeb70c](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/ebeb70c3b3453c5e753fc9cc8b218979f20bc0d1))
+* **deps:** update kotest to v6.1.11 ([3d8b86a](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/3d8b86a96f87b8753eddd2687aedb92112b4f105))
+* **deps:** update kotest to v6.1.3 ([329ba97](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/329ba9767ff6905fbcb82d26f293d42bbd6fb5fd))
+* **deps:** update kotest to v6.1.4 ([c4c0230](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/c4c02300eecabf8fbf7525ac8ddc0ae475b8b2dc))
+* **deps:** update kotest to v6.1.7 ([0a281b3](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/0a281b3df717c5fabd692c745cfdbf87dc78d276))
+* **deps:** update kotest to v6.1.8 ([b78b2d0](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/b78b2d0a73afdef6d7236791448ac554ff518d97))
+* **deps:** update kotest to v6.1.9 ([c18aa4c](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/c18aa4c0cc807105aa23821529ccf14ff02af13b))
+* **deps:** update ktor monorepo to v3.4.1 ([1f97f54](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/1f97f544119eff65704eb484b788117a044e753e))
+* **deps:** update ktor monorepo to v3.4.2 ([6c76aa1](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/6c76aa1bd2820e54577e23151b491aa17190cf0e))
+* **deps:** update node.js to 24.14 ([a5e5ac3](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/a5e5ac31499b60f551b633834fe5fe5d92e1d373))
+* **deps:** update plugin com.gradle.develocity to v4.4.0 ([269c148](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/269c1488ac2641c9c6e5238e2959ff9a69fb4c5e))
+
+### Build and continuous integration
+
+* **deps:** update actions/setup-node action to v6.3.0 ([2b394a0](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/2b394a0a8ca63eb498489f7e932b9987b8e8fe76))
+* **deps:** update codecov/codecov-action action to v5.5.3 ([de9ced0](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/de9ced0636343cbf2ac690698f0cb86bc03941fa))
+* **deps:** update codecov/codecov-action action to v6 ([b98436e](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/b98436e036a27050c497b056db47d044cca8f4a5))
+
 ## [1.0.19](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/compare/1.0.18...1.0.19) (2026-02-05)
 
 ### Dependency updates
