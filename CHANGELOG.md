@@ -1,3 +1,18 @@
+## [1.0.21](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/compare/1.0.20...1.0.21) (2026-05-13)
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlinx:kotlinx-coroutines-core to v1.11.0 ([847fcd8](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/847fcd8d6ee3309046600df6bcd0cb1046a24cac))
+* **deps:** update dependency com.tngtech.archunit:archunit-junit5 to v1.4.2 ([3809632](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/380963254b4490bb87e47c0148f91d321f0e2820))
+* **deps:** update dependency io.github.oshai:kotlin-logging-jvm to v8.0.02 ([311140d](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/311140d4560cdd290588a71ca8b4f4d95632ec1d))
+* **deps:** update gradle to v9.5.1 ([46970c3](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/46970c36c4ee0f8cc66573b2a69f6fc847484791))
+* **deps:** update ktor monorepo to v3.4.3 ([b2af081](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/b2af081f4659acf88b510653a6b20752bf9ca1fd))
+* **deps:** update plugin com.gradle.develocity to v4.4.1 ([1f20c52](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/1f20c5263ba22b41fae4e35187276583d31d214d))
+
+### Build and continuous integration
+
+* **deps:** update actions/setup-node action to v6.4.0 ([807bcdf](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/807bcdfdad92a4f0708fbb814adb6e06ea209978))
+
 ## [1.0.20](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/compare/1.0.19...1.0.20) (2026-04-10)
 
 ### Dependency updates
