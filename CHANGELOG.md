@@ -1,3 +1,17 @@
+## [1.0.23](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/compare/1.0.22...1.0.23) (2026-11-12)
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlinx:kotlinx-serialization-json to v1.13.0 ([318d21e](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/318d21eefde53e9467f3ea6951ff63ec750abdce))
+* **deps:** update dependency com.azure:azure-digitaltwins-core to v1.6.1 ([795cc3c](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/795cc3c7b92b78bc3ada5fca56970ad5d7ee6560))
+* **deps:** update dependency com.azure:azure-identity to v1.19.0 ([3ab823f](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/3ab823fd548623d569c08c36645a4ab389f9ed41))
+* **deps:** update dependency io.github.oshai:kotlin-logging-jvm to v8.0.6 ([4b283c9](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/4b283c9cae7d0ba81a82e6cca575de021d14a29d))
+* **deps:** update dependency io.github.oshai:kotlin-logging-jvm to v8.0.7 ([71e5722](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/71e5722c836fb1ff9546423a66b9b3bc073812ba))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.158 ([edcc776](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/edcc77663f5c8f063ab1f9f16494277788670df2))
+* **deps:** update gradle to v9.9.0 ([89c9b3a](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/89c9b3abd13a8fe74d88b603e5a75a78e8b3e75c))
+* **deps:** update gradle to v9.9.1 ([672b23f](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/672b23feedf12e2cdb23ab85c68319b12df6610c))
+* **deps:** update plugin com.gradle.develocity to v4.6.1 ([064f329](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/commit/064f32923cb73f359b3c6d78f04fefcb0bd1f606))
+
 ## [1.0.22](https://github.com/Web-of-Digital-Twins/azuredt-wodt-adapter/compare/1.0.21...1.0.22) (2026-10-30)
 
 ### Dependency updates
